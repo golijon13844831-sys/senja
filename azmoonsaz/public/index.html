@@ -1,0 +1,1415 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>آزمون‌ساز</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cg fill='none' stroke='%23D9A21B' stroke-width='3'%3E%3Crect x='13' y='13' width='22' height='22'/%3E%3Crect x='13' y='13' width='22' height='22' transform='rotate(45 24 24)'/%3E%3C/g%3E%3Ccircle cx='24' cy='24' r='5' fill='%23D9A21B'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#F4F1E9;--surface:#FFFFFF;--surface2:#FAF8F2;--ink:#20261F;--ink2:#4C554C;--muted:#8B948A;--line:#E7E2D4;--line2:#D8D2C0;--accent:#D9A21B;--accent-strong:#A87A10;--accent-soft:rgba(217,162,27,.13);--green:#2E7D5B;--green-soft:rgba(46,125,91,.12);--red:#C0492F;--red-soft:rgba(192,73,47,.11);--teal:#22766D;--teal-soft:rgba(34,118,109,.11);--hover:#F0ECE0;--sb:#20261F;--sb-text:#EDEAE0}
+[data-theme=dark]{--bg:#141712;--surface:#1D201A;--surface2:#22261E;--ink:#ECE9DD;--ink2:#B8B5A8;--muted:#7C8075;--line:#2A2D25;--line2:#3A3E32;--accent:#E2B33C;--accent-strong:#C9971F;--accent-soft:rgba(226,179,60,.15);--green:#54B08A;--green-soft:rgba(84,176,138,.15);--red:#E0755A;--red-soft:rgba(224,117,90,.14);--teal:#57B3A8;--teal-soft:rgba(87,179,168,.14);--hover:#242822;--sb:#191C15;--sb-text:#EDEAE0}
+body{font-family:'Vazirmatn',Tahoma,sans-serif;background:var(--bg);color:var(--ink);font-size:15px;line-height:1.9;-webkit-font-smoothing:antialiased;min-height:100vh}
+::selection{background:var(--accent);color:#241b07}
+:focus-visible{outline:2px solid var(--accent-strong);outline-offset:2px;border-radius:6px}
+.hidden{display:none!important}
+.ltr{direction:ltr}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+input,select,textarea{font:inherit;color:var(--ink)}
+.ic{flex:none;display:inline-block;vertical-align:middle}
+::-webkit-scrollbar{width:9px;height:9px}::-webkit-scrollbar-thumb{background:var(--line2);border-radius:9px;border:2px solid var(--bg)}::-webkit-scrollbar-track{background:transparent}
+body.modal-open{overflow:hidden}
+/* دکمه و نشان و فیلد */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 18px;border-radius:11px;font-weight:700;font-size:14px;border:1px solid transparent;transition:.18s;white-space:nowrap;user-select:none;text-decoration:none}
+.btn.primary{background:var(--accent);color:#241b07}.btn.primary:hover{background:var(--accent-strong)}
+.btn.ghost{border-color:var(--line2);color:var(--ink2)}.btn.ghost:hover{background:var(--hover);color:var(--ink);border-color:var(--muted)}
+.btn.danger{background:var(--red);color:#fff}.btn.danger:hover{filter:brightness(1.1)}
+.btn.sm{padding:6px 12px;font-size:13px;border-radius:9px}.btn.block{width:100%}
+.btn.icon{width:34px;height:34px;padding:0;border-radius:10px;border:1px solid var(--line2);color:var(--ink2)}
+.btn.icon:hover{background:var(--hover);color:var(--ink)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:99px;line-height:1.7;white-space:nowrap}
+.b-green{background:var(--green-soft);color:var(--green)}.b-red{background:var(--red-soft);color:var(--red)}
+.b-saffron{background:var(--accent-soft);color:var(--accent-strong)}.b-grey{background:var(--hover);color:var(--muted)}.b-teal{background:var(--teal-soft);color:var(--teal)}
+.fld{display:flex;flex-direction:column;gap:7px;margin-bottom:15px;font-size:13px;font-weight:600;color:var(--ink2)}
+.fld input,.fld select,.fld textarea{background:var(--surface2);border:1px solid var(--line2);border-radius:11px;padding:10px 14px;outline:none;transition:.15s;font-weight:500}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--accent-strong);box-shadow:0 0 0 3px var(--accent-soft)}
+.fld textarea{resize:vertical;min-height:70px;font-family:inherit}
+.switch{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--ink2);cursor:pointer;user-select:none}
+.switch input{position:absolute;opacity:0;pointer-events:none}
+.switch .tr{width:38px;height:21px;border-radius:99px;background:var(--line2);position:relative;transition:.2s;flex:none}
+.switch .tr::after{content:'';position:absolute;top:2.5px;inset-inline-start:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.2s;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.switch input:checked+.tr{background:var(--accent)}.switch input:checked+.tr::after{transform:translateX(-16px)}
+/* چیدمان */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.card.p0{padding:0;overflow:hidden}
+.card-title{display:flex;align-items:center;gap:10px;font-weight:800;font-size:15.5px;margin-bottom:16px}
+.card-title::before{content:'';width:5px;height:19px;background:var(--accent);border-radius:3px;flex:none}
+.stat-strip{display:flex;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:22px;flex-wrap:wrap}
+.ss-item{flex:1 1 140px;padding:18px 22px;display:flex;flex-direction:column;gap:2px;border-inline-start:1px solid var(--line)}
+.ss-item:first-child{border-inline-start:none}
+.ss-l{font-size:12.5px;color:var(--muted);font-weight:600;display:flex;align-items:center;gap:6px}
+.ss-num{font-size:26px;font-weight:800;line-height:1.4}
+.grid-2{display:grid;grid-template-columns:1.35fr 1fr;gap:20px;margin-bottom:20px}
+.vwrap{padding:26px 30px 70px;max-width:1180px;margin:0 auto;animation:fadeUp .3s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.vhead{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.vh-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.searchbox{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:8px 14px;color:var(--muted)}
+.searchbox input{border:none;background:none;outline:none;flex:1;font-size:13.5px;color:var(--ink)}
+.empty{padding:38px 20px;text-align:center;color:var(--muted);font-size:13px}.empty .ic{opacity:.4;margin-bottom:10px}
+.hint{font-size:12px;color:var(--muted);margin-top:10px}
+/* جدول */
+.tbl-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl th{text-align:right;font-size:12px;color:var(--muted);font-weight:700;padding:12px 14px;border-bottom:1px solid var(--line);background:var(--surface2);white-space:nowrap}
+.tbl td{padding:13px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tbl tbody tr:last-child td{border-bottom:none}.tbl tbody tr:hover{background:var(--hover)}
+tr.me-row{background:var(--accent-soft)!important}
+.cell-user{display:flex;align-items:center;gap:11px}
+.td-actions{display:flex;gap:6px;justify-content:flex-end;flex-wrap:wrap}
+.avatar{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;flex:none}
+.avatar.sm{width:34px;height:34px;font-size:13px;border-radius:10px}
+.avatar.lg{width:78px;height:78px;font-size:30px;border-radius:20px}
+.avatar.more{background:var(--hover);color:var(--ink2);font-size:11px;border:2px solid var(--surface)}
+.rk{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--hover);color:var(--ink2);flex:none}
+.rk.r1{background:var(--accent);color:#241b07}.rk.r2{background:#B9B29C;color:#2B2B25}.rk.r3{background:#C98A5F;color:#33210F}
+/* پوسته */
+.app{display:flex;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;flex:0 0 250px;background:var(--sb);color:var(--sb-text);display:flex;flex-direction:column;z-index:30}
+.sb-brand{display:flex;align-items:center;gap:12px;padding:22px 20px 18px;border-bottom:1px solid rgba(255,255,255,.08)}
+.sb-brand .logo{color:var(--accent);flex:none;display:flex}
+.sb-brand b{font-size:17px;font-weight:800;display:block;line-height:1.5}
+.sb-brand span{font-size:11px;color:rgba(237,234,224,.55);display:block}
+.sb-nav{flex:1;padding:14px 12px;display:flex;flex-direction:column;gap:3px;overflow-y:auto}
+.sb-item{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:11px;color:rgba(237,234,224,.72);font-size:13.5px;font-weight:600;transition:.15s;cursor:pointer;border-inline-start:3px solid transparent}
+.sb-item:hover{background:rgba(255,255,255,.06);color:#fff}
+.sb-item.on{background:var(--accent-soft);color:var(--accent);border-inline-start-color:var(--accent)}
+.sb-foot{padding:12px;border-top:1px solid rgba(255,255,255,.08)}
+.sb-user{display:flex;align-items:center;gap:10px;padding:8px;border-radius:12px;background:rgba(255,255,255,.05)}
+.su-info{flex:1;min-width:0}.su-info b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.su-info span{font-size:11px;color:rgba(237,234,224,.5)}
+.mainwrap{flex:1;min-width:0;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:25;background:var(--bg);border-bottom:1px solid var(--line);padding:13px 30px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.tb-title h1{font-size:19px;font-weight:800;line-height:1.5}.tb-date{font-size:12px;color:var(--muted)}
+.tb-left{display:flex;align-items:center;gap:10px}
+.tb-icon{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:var(--ink2);border:1px solid var(--line);background:var(--surface)}
+.tb-icon:hover{color:var(--ink)}
+.burger{display:none}
+.sb-backdrop{display:none}
+/* ورود */
+.login-wrap{min-height:100vh;display:grid;grid-template-columns:1.05fr 1fr}
+.login-brand{position:relative;background:var(--sb);color:var(--sb-text);overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;padding:52px 54px}
+.girih{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cg fill='none' stroke='%23D9A21B' stroke-opacity='.09'%3E%3Crect x='42' y='42' width='56' height='56'/%3E%3Crect x='42' y='42' width='56' height='56' transform='rotate(45 70 70)'/%3E%3Ccircle cx='70' cy='70' r='4'/%3E%3Cpath d='M70 0v24M70 116v24M0 70h24M116 70h24'/%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.girih.soft{opacity:.5}
+.brand-inner,.brand-foot{position:relative;z-index:2}
+.brand-logo{color:var(--accent);display:flex;align-items:center;gap:14px}
+.brand-logo b{font-size:22px;font-weight:900;display:block;line-height:1.4}
+.brand-logo span{font-size:10.5px;letter-spacing:3px;color:rgba(237,234,224,.45);display:block}
+.brand-h{font-size:clamp(22px,3vw,34px);font-weight:900;line-height:1.7;margin:30px 0}
+.brand-feats{list-style:none;display:flex;flex-direction:column;gap:14px}
+.brand-feats li{display:flex;gap:12px;align-items:center;font-size:14px;color:rgba(237,234,224,.85)}
+.brand-feats .ic{color:var(--accent)}
+.brand-foot{font-size:12px;color:rgba(237,234,224,.5)}
+.login-side{display:grid;place-items:center;padding:30px;background:var(--bg)}
+.login-card{width:100%;max-width:400px;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:32px;position:relative;z-index:2}
+.login-card h2{font-size:20px;font-weight:800;margin-bottom:4px}
+.lc-sub{font-size:12.5px;color:var(--muted);margin-bottom:20px}
+.divider{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:11.5px;margin:20px 0 14px}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--line)}
+.login-card.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(7px)}40%,80%{transform:translateX(-7px)}}
+/* ردیف آزمون */
+.exam-row{display:flex;align-items:center;gap:16px;padding:16px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.exam-row:last-child{border-bottom:none}
+.ex-info{flex:1;min-width:210px}
+.ex-info b{font-size:15px;font-weight:800;display:block}
+.ex-info>span{font-size:12px;color:var(--muted)}
+.ex-meta{display:flex;gap:14px;font-size:12px;color:var(--ink2);margin-top:4px;flex-wrap:wrap;align-items:center}
+.ex-meta span{display:inline-flex;align-items:center;gap:5px}.ex-meta .ic{color:var(--muted)}
+.ex-stats{display:flex;gap:18px;text-align:center}
+.ex-stats b{display:block;font-size:16px;font-weight:800}.ex-stats span{font-size:10.5px;color:var(--muted)}
+.ex-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.st-dot{width:9px;height:9px;border-radius:50%;flex:none}
+.st-dot.draft{background:var(--muted)}.st-dot.published{background:var(--green)}.st-dot.closed{background:var(--red)}
+.avs{display:flex;flex-wrap:wrap;direction:rtl;gap:4px}.avs .avatar{border:2px solid var(--surface)}
+.share-strip{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap}
+.codechip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:10px;border:1.5px dashed var(--accent-strong);color:var(--accent-strong);font-weight:800;font-size:13px;cursor:pointer;background:var(--accent-soft)}
+.codechip.big{font-size:15px;padding:8px 16px}
+.origin-box{background:var(--surface2);border:1px solid var(--line2);border-radius:10px;padding:10px 14px;font-weight:700;margin:10px 0;display:inline-block;direction:ltr}
+.steps{list-style:none;counter-reset:st;display:flex;flex-direction:column;gap:12px}
+.steps li{counter-increment:st;display:flex;gap:12px;align-items:flex-start;font-size:13.5px;color:var(--ink2)}
+.steps li::before{content:counter(st);width:26px;height:26px;border-radius:8px;background:var(--accent-soft);color:var(--accent-strong);font-weight:800;display:grid;place-items:center;flex:none}
+.stu-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.stu-row:last-child{border-bottom:none}
+/* آزمون‌ساز */
+.bh-top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.exam-title-input{flex:1;min-width:220px;font-size:20px;font-weight:800;background:none;border:none;border-bottom:2px solid var(--line);padding:6px 2px;outline:none;transition:.15s;color:var(--ink)}
+.exam-title-input:focus{border-bottom-color:var(--accent)}
+.bh-meta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.bh-meta label{display:flex;flex-direction:column;gap:5px;font-size:11.5px;color:var(--muted);font-weight:700}
+.bh-meta input{background:var(--surface2);border:1px solid var(--line2);border-radius:10px;padding:7px 10px;outline:none;font-size:13.5px;min-width:100px;color:var(--ink)}
+.bh-meta input:focus{border-color:var(--accent-strong)}
+.bh-toggles{display:flex;gap:18px;flex-wrap:wrap;padding:14px 0;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line)}
+.bh-classes{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--muted);font-weight:600}
+.bh-stats{margin-top:12px;font-size:12.5px;color:var(--ink2);font-weight:700}
+.chips{display:flex;gap:7px;flex-wrap:wrap}
+.chip{padding:6px 14px;border-radius:99px;border:1px solid var(--line2);font-size:13px;font-weight:600;color:var(--ink2);transition:.15s;cursor:pointer}
+.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.qlist{display:flex;flex-direction:column;gap:16px;margin-top:18px}
+.q-card{padding:18px 20px}
+.q-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.q-num{font-weight:800;font-size:14px}
+.q-tools{margin-inline-start:auto;display:flex;gap:5px}
+.q-tools button{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:var(--muted);transition:.13s}
+.q-tools button:hover{background:var(--hover);color:var(--ink)}
+.q-tools button:disabled{opacity:.35;cursor:not-allowed}
+.q-tools .danger:hover{color:var(--red);background:var(--red-soft)}
+.pts{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-weight:700}
+.pts input{width:60px;text-align:center;background:var(--surface2);border:1px solid var(--line2);border-radius:9px;padding:5px 6px;outline:none;font-weight:800;color:var(--ink)}
+.q-text{width:100%;background:var(--surface2);border:1px solid var(--line2);border-radius:11px;padding:11px 14px;outline:none;font-size:14.5px;font-weight:600;resize:vertical;min-height:54px;margin-bottom:12px;font-family:inherit;color:var(--ink)}
+.q-text:focus{border-color:var(--accent-strong);box-shadow:0 0 0 3px var(--accent-soft)}
+.q-expl{width:100%;background:none;border:none;border-bottom:1px dashed var(--line2);padding:6px 2px;outline:none;font-size:12.5px;color:var(--ink2);margin-top:6px;font-family:inherit}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt-row{display:flex;align-items:center;gap:9px}
+.opt-row input{flex:1;background:var(--surface2);border:1px solid var(--line2);border-radius:10px;padding:9px 13px;outline:none;font-size:13.5px;color:var(--ink)}
+.opt-row input:focus{border-color:var(--accent-strong)}
+.opt-row input:disabled{opacity:.75;background:var(--hover)}
+.opt-mark{width:26px;height:26px;border-radius:50%;border:2px solid var(--line2);flex:none;transition:.15s;display:grid;place-items:center;cursor:pointer}
+.opt-mark.check{border-radius:7px}
+.opt-mark.radio:hover{border-color:var(--accent-strong)}
+.opt-row.checked .opt-mark{border-color:var(--accent-strong);background:var(--accent)}
+.opt-row.checked .opt-mark::after{content:'';width:9px;height:9px;border-radius:50%;background:#241b07}
+.opt-row.checked .opt-mark.check::after{border-radius:2px}
+.opt-del{width:28px;height:28px;border-radius:8px;color:var(--muted);display:grid;place-items:center;flex:none}
+.opt-del:hover{color:var(--red);background:var(--red-soft)}
+.add-opt{align-self:flex-start;font-size:12.5px;font-weight:700;color:var(--teal);padding:6px 10px;border-radius:8px;display:inline-flex;align-items:center;gap:5px}
+.add-opt:hover{background:var(--teal-soft)}
+.add-q p{font-weight:700;font-size:14px;margin-bottom:12px}
+.add-q-row{display:flex;gap:9px;flex-wrap:wrap}
+.aq-btn{padding:10px 16px;border:1.5px dashed var(--line2);border-radius:12px;font-size:13px;font-weight:700;color:var(--ink2);transition:.15s;cursor:pointer}
+.aq-btn:hover{border-color:var(--accent-strong);color:var(--accent-strong);border-style:solid}
+.aq-btn.from-bank{border-style:solid;background:var(--surface2)}
+/* برگزاری */
+.runner{position:fixed;inset:0;z-index:50;background:var(--bg);display:flex;flex-direction:column;overflow-y:auto}
+.r-head{display:flex;align-items:center;gap:16px;padding:13px 26px;background:var(--surface);border-bottom:1px solid var(--line);flex-wrap:wrap;position:sticky;top:0;z-index:5}
+.r-exam{min-width:0;flex:1}
+.r-exam b{display:block;font-size:15.5px;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.r-exam span{font-size:11.5px;color:var(--muted)}
+.r-mid{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.r-timer{display:flex;align-items:center;gap:8px;border:1.5px solid var(--line2);border-radius:11px;padding:7px 15px;font-weight:800;font-size:18px;transition:.2s}
+.r-timer .ic{color:var(--muted)}
+.r-timer.warn{border-color:var(--accent-strong);color:var(--accent-strong)}.r-timer.warn .ic{color:var(--accent-strong)}
+.r-timer.crit{border-color:var(--red);color:var(--red);animation:pulse 1s infinite}.r-timer.crit .ic{color:var(--red)}
+@keyframes pulse{50%{box-shadow:0 0 0 5px var(--red-soft)}}
+.r-prog{font-size:12.5px;color:var(--muted);font-weight:600}
+.saveind{font-size:11.5px;color:var(--muted);display:inline-flex;gap:5px;align-items:center}
+.saveind.saving{color:var(--accent-strong)}.saveind.err{color:var(--red)}
+.r-body{display:grid;grid-template-columns:minmax(0,1fr) 250px;gap:20px;padding:24px;max-width:1060px;margin:0 auto;width:100%;align-items:start}
+.q-view{padding:24px 26px}
+.qv-meta{display:flex;align-items:center;gap:12px;font-size:12.5px;color:var(--muted);font-weight:700;flex-wrap:wrap}
+.flagbtn{margin-inline-start:auto;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--muted);padding:5px 11px;border-radius:99px;border:1px solid var(--line2);transition:.15s;cursor:pointer}
+.flagbtn:hover,.flagbtn.on{color:var(--accent-strong);border-color:var(--accent-strong)}
+.flagbtn.on{background:var(--accent-soft)}
+.qv-text{font-size:18.5px;font-weight:700;line-height:2;margin:16px 0 22px;white-space:pre-wrap}
+.picks{display:flex;flex-direction:column;gap:10px}
+.opt-pick{display:flex;align-items:center;gap:13px;padding:13px 17px;border:1.5px solid var(--line);border-radius:13px;cursor:pointer;transition:.15s;background:var(--surface);font-size:14.5px;font-weight:600}
+.opt-pick:hover{border-color:var(--muted)}
+.opt-pick.sel{border-color:var(--accent-strong);background:var(--accent-soft)}
+.om{width:24px;height:24px;border-radius:50%;border:2px solid var(--line2);flex:none;display:grid;place-items:center;transition:.15s;color:#241b07}
+.om-c{border-radius:7px}
+.opt-pick.sel .om{border-color:var(--accent-strong);background:var(--accent)}
+.opt-pick .ic{width:14px;height:14px}
+.opt-txt{flex:1}
+.blank-in{width:100%;background:var(--surface2);border:1.5px solid var(--line2);border-radius:12px;padding:13px 16px;outline:none;font-size:15px;color:var(--ink)}
+.blank-in:focus{border-color:var(--accent-strong);box-shadow:0 0 0 3px var(--accent-soft)}
+.essay-in{width:100%;background:var(--surface2);border:1.5px solid var(--line2);border-radius:12px;padding:14px 16px;outline:none;font-size:14px;line-height:2.1;resize:vertical;min-height:170px;font-family:inherit;color:var(--ink)}
+.essay-in:focus{border-color:var(--accent-strong);box-shadow:0 0 0 3px var(--accent-soft)}
+.cc{font-size:11.5px;color:var(--muted)}
+.r-nav{display:flex;align-items:center;gap:12px;margin-top:18px}
+.r-navhint{flex:1;text-align:center;font-size:11.5px;color:var(--muted)}
+.r-pal{position:sticky;top:86px;padding:16px}
+.pal-h{font-size:13px;font-weight:800;margin-bottom:12px}
+.pal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.pal-btn{aspect-ratio:1;border-radius:10px;border:1.5px solid var(--line2);font-weight:800;font-size:13.5px;color:var(--ink2);transition:.13s;display:grid;place-items:center;cursor:pointer}
+.pal-btn:hover{border-color:var(--muted)}
+.pal-btn.p-ans{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.pal-btn.p-flag{background:var(--accent-soft);border-color:var(--accent-strong);color:var(--accent-strong)}
+.pal-btn.p-cur{outline:2.5px solid var(--ink);outline-offset:1.5px}
+.pal-legend{display:flex;flex-direction:column;gap:7px;margin:14px 0;font-size:11.5px;color:var(--muted)}
+.pal-legend span{display:flex;align-items:center;gap:7px}
+.lg{width:13px;height:13px;border-radius:4px;border:1.5px solid var(--line2);flex:none}
+.lg-ans{background:var(--green-soft);border-color:var(--green)}.lg-flag{background:var(--accent-soft);border-color:var(--accent-strong)}
+/* نتیجه */
+.result-screen{min-height:100vh;display:grid;place-items:center;padding:26px;position:relative;overflow:hidden}
+.rs-card{position:relative;z-index:2;width:100%;max-width:530px;text-align:center;padding:38px 34px;animation:fadeUp .4s}
+.rs-head{font-size:13px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.rs-title{font-size:21px;font-weight:800;margin-bottom:26px}
+.rs-ring{position:relative;width:190px;height:190px;margin:0 auto 22px}
+.ring-svg{width:100%;height:100%}
+.ring-bg{fill:none;stroke:var(--line2);stroke-width:9}
+.ring-fg{fill:none;stroke-width:9;stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;transition:stroke-dashoffset 1.1s cubic-bezier(.25,.9,.3,1)}
+.rs-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.5}
+.rs-num b{font-size:44px;font-weight:900}.rs-num span{font-size:12.5px;color:var(--muted);font-weight:700}
+.rs-grade{margin-bottom:18px}
+.rs-pend{margin-bottom:16px}
+.rs-stats{display:flex;justify-content:center;gap:22px;flex-wrap:wrap;padding:16px 0;border-top:1px dashed var(--line);border-bottom:1px dashed var(--line);margin-bottom:22px;font-size:12.5px;color:var(--ink2)}
+.rs-stats b{display:block;font-size:17px;font-weight:800;color:var(--ink)}
+.rs-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.rv-body{max-width:860px;margin:0 auto;width:100%;padding:24px 26px 70px;display:flex;flex-direction:column;gap:14px}
+.rv-top{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;margin-bottom:4px}
+.sh-q{background:var(--surface);border:1px solid var(--line);border-radius:15px;padding:18px 20px;text-align:right}
+.sh-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:10px}
+.sh-pts{margin-inline-start:auto;color:var(--ink);font-weight:800}
+.sh-text{font-size:15px;font-weight:700;white-space:pre-wrap;margin-bottom:12px}
+.sh-ans,.sh-key{padding:11px 14px;border-radius:11px;font-size:13.5px;white-space:pre-wrap;line-height:2}
+.sh-ans{background:var(--hover)}
+.sh-key{background:var(--green-soft);margin-top:8px}
+.sh-lab{font-weight:800;font-size:12px;color:var(--muted);display:block;margin-bottom:2px}
+.sh-expl{margin-top:8px;font-size:12.5px;color:var(--ink2)}.sh-expl b{color:var(--teal)}
+.rv-opt{display:flex;align-items:center;gap:10px;padding:9px 13px;border-radius:10px;font-size:13.5px;margin-bottom:6px;border:1px solid var(--line)}
+.rv-opt.ok{background:var(--green-soft);border-color:var(--green)}
+.rv-opt.bad{background:var(--red-soft);border-color:var(--red)}
+.rv-mark{width:20px;height:20px;flex:none;display:grid;place-items:center}
+.rv-mark.ok{color:var(--green)}.rv-mark.bad{color:var(--red)}
+/* مودال و توست */
+.mback{position:fixed;inset:0;background:rgba(22,27,22,.55);backdrop-filter:blur(3px);display:grid;place-items:center;z-index:100;padding:18px;animation:fade .18s;overflow-y:auto}
+@keyframes fade{from{opacity:0}}
+.modal{background:var(--surface);border-radius:18px;max-width:540px;width:100%;max-height:calc(100vh - 40px);overflow-y:auto;padding:24px 26px;animation:pop .22s cubic-bezier(.2,.9,.3,1.15)}
+.modal.wide{max-width:780px}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}}
+.m-title{font-size:17px;font-weight:800;margin-bottom:6px}
+.m-sub{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+.m-text{font-size:14px;color:var(--ink2);margin-bottom:18px;line-height:2}
+.m-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+#toasts{position:fixed;bottom:18px;left:18px;z-index:200;display:flex;flex-direction:column;gap:9px}
+.toast{display:flex;align-items:center;gap:10px;background:var(--sb);color:var(--sb-text);padding:12px 18px;border-radius:13px;font-size:13.5px;font-weight:600;box-shadow:0 10px 30px rgba(20,25,20,.28);animation:tIn .3s cubic-bezier(.2,.9,.3,1.2);max-width:340px}
+.t-ok .ic{color:#6BC893}.t-err .ic{color:#F09A82}.t-info .ic{color:#E2B33C}
+.toast.out{animation:tOut .3s forwards}
+@keyframes tIn{from{opacity:0;transform:translateY(12px)}}
+@keyframes tOut{to{opacity:0;transform:translateY(8px)}}
+/* نمودار */
+.bars{display:flex;gap:7px;align-items:flex-end;height:185px;padding-top:8px}
+.bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;justify-content:flex-end;height:100%}
+.bar-col b{font-size:11.5px;color:var(--ink2)}
+.bar-col span{font-size:10.5px;color:var(--muted);white-space:nowrap}
+.bar{width:100%;max-width:40px;background:var(--accent);border-radius:6px 6px 3px 3px;min-height:3px}
+.hbars{display:flex;flex-direction:column;gap:12px}
+.hb{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.hb-l{width:175px;font-weight:600;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex:none}
+.hb-t{flex:1;height:11px;background:var(--hover);border-radius:99px;overflow:hidden}
+.hb-f{height:100%;border-radius:99px;background:var(--accent)}
+.hb-f.g{background:var(--green)}.hb-f.r{background:var(--red)}
+.hb-v{width:48px;font-weight:800;font-size:12px;flex:none;text-align:center}
+.welcome{display:flex;align-items:center;justify-content:space-between;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:24px 28px;margin-bottom:22px;flex-wrap:wrap}
+.welcome h2{font-size:22px;font-weight:900}.welcome p{font-size:12.5px;color:var(--muted);margin-top:3px}
+.w-stats{display:flex;gap:26px;flex-wrap:wrap}
+.w-stats b{display:block;font-size:22px;font-weight:800;color:var(--accent-strong)}
+.w-stats span{font-size:11.5px;color:var(--muted)}
+.bd-row{display:flex;align-items:center;gap:16px;padding:14px 20px;border-bottom:1px solid var(--line)}
+.bd-row:last-child{border-bottom:none}
+.bd-ic{width:44px;height:44px;border-radius:13px;display:grid;place-items:center;flex:none;background:var(--accent-soft);color:var(--accent-strong)}
+.bank-row{display:flex;align-items:center;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.bank-row:last-child{border-bottom:none}
+.bank-row p{font-size:13.5px;font-weight:700;white-space:pre-wrap}
+.bank-row span{font-size:11.5px;color:var(--muted)}
+.bank-row>div{flex:1;min-width:0}
+.gr-q{border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px}
+.gr-meta{display:flex;gap:10px;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:8px;flex-wrap:wrap;align-items:center}
+.gr-text{font-size:14px;font-weight:700;margin-bottom:10px;white-space:pre-wrap}
+.gr-stu{background:var(--hover);border-radius:10px;padding:10px 13px;font-size:13px;white-space:pre-wrap;line-height:2;margin-bottom:8px}
+.gr-guide{background:var(--teal-soft);border-radius:10px;padding:9px 13px;font-size:12.5px;color:var(--teal);margin-bottom:10px}
+.gr-score label{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;flex-wrap:wrap}
+.gr-score input{width:90px;background:var(--surface2);border:1.5px solid var(--line2);border-radius:10px;padding:8px 12px;outline:none;text-align:center;font-weight:800;font-size:15px;color:var(--ink)}
+.gr-score input:focus{border-color:var(--accent-strong)}
+/* چاپ */
+@media print{.sidebar,.topbar,.no-print,#toasts{display:none!important}.app{display:block}.vwrap{max-width:100%;padding:0}body{background:#fff}}
+/* واکنش‌گرا */
+@media (max-width:1120px){
+  .sidebar{flex-basis:68px}
+  .sb-brand{padding:18px 10px;justify-content:center}.sb-brand>div{display:none}
+  .sb-item{justify-content:center;padding:11px 0}.sb-item span{display:none}
+  .sb-user{justify-content:center;padding:6px}.su-info{display:none}
+  .grid-2{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .login-wrap{grid-template-columns:1fr}
+  .login-brand{padding:34px 28px}.brand-h{font-size:23px;margin:18px 0 20px}.brand-foot{display:none}
+  .sidebar{position:fixed;top:0;bottom:0;inset-inline-end:0;flex-basis:250px;transform:translateX(105%);transition:transform .28s;z-index:70}
+  body.sb-open .sidebar{transform:none}
+  .sb-brand{justify-content:flex-start;padding:22px 20px 18px}.sb-brand>div{display:block}
+  .sb-item{justify-content:flex-start;padding:10px 14px}.sb-item span{display:block}
+  .su-info{display:block}
+  .sb-backdrop{display:block;position:fixed;inset:0;background:rgba(20,25,20,.45);z-index:65;opacity:0;pointer-events:none;transition:.25s}
+  body.sb-open .sb-backdrop{opacity:1;pointer-events:auto}
+  .burger{display:grid}
+  .r-body{grid-template-columns:1fr}.r-pal{position:static}
+  .pal-grid{display:flex;flex-wrap:wrap}
+  .vwrap{padding:18px 16px 70px}.topbar{padding:12px 16px}
+  .stat-strip{display:grid;grid-template-columns:1fr 1fr}
+  .ss-item{border:none;border-bottom:1px solid var(--line)}
+  input,select,textarea{font-size:16px}
+}
+</style>
+</head>
+<body>
+<datalist id="subjects">
+  <option>ریاضی</option><option>علوم تجربی</option><option>ادبیات فارسی</option>
+  <option>عربی</option><option>زبان انگلیسی</option><option>مطالعات اجتماعی</option><option>عمومی</option>
+</datalist>
+<div id="auth"></div>
+<div id="app" class="hidden"></div>
+<div id="runner" class="hidden"></div>
+<div id="modalRoot"></div>
+<div id="toasts"></div>
+<script>
+/* ================================================================
+   فرانت‌اند آزمون‌ساز — بدون فریم‌ورک، متصل به API
+   همهٔ HTMLهای داینامیک با چسباندن رشته ساخته می‌شوند
+================================================================ */
+var $=function(id){return document.getElementById(id);};
+var FA='۰۱۲۳۴۵۶۷۸۹';
+function fa(n){return String(n).replace(/\d/g,function(d){return FA[+d];});}
+function num(v){var s=String(v==null?'':v).replace(/[۰-۹]/g,function(d){return FA.indexOf(d);}).trim();var n=parseFloat(s);return isNaN(n)?0:n;}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c];});}
+function fmt(x){var s=(Math.round((+x||0)*10)/10).toString();return fa(s.replace('.','٫'));}
+function clone(o){return JSON.parse(JSON.stringify(o));}
+var QTYPE={mcq:'چهارگزینه‌ای',multi:'چندگزینه‌ای',tf:'صحیح / غلط',blank:'جای خالی',essay:'تشریحی'};
+var ROLE_FA={teacher:'معلم',student:'دانش‌آموز'};
+var AVC=['#9A741A','#2E7D5B','#C0492F','#2A7A72','#7A5C2E','#5E6E3A','#8F5A46','#4E6E58'];
+function avColor(n){var h=0;var s=String(n);for(var i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return AVC[h%AVC.length];}
+function av(name,cls){return '<span class="avatar '+(cls||'')+'" style="background:'+avColor(name)+'">'+esc(String(name).trim().charAt(0)||'؟')+'</span>';}
+function scB(sc){return '<span class="badge '+(sc>=17?'b-green':sc>=10?'b-saffron':'b-red')+'">'+fmt(sc)+' از ۲۰</span>';}
+function stCls(s){return s==='published'?'b-green':s==='draft'?'b-grey':'b-red';}
+function stFa(s){return s==='published'?'منتشرشده':s==='draft'?'پیش‌نویس':'پایان‌یافته';}
+/* جلالی */
+var JM=['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
+var WD=['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنجشنبه','جمعه','شنبه'];
+function jal(ts){var d=new Date(ts),gy=d.getFullYear(),gm=d.getMonth()+1,gd=d.getDate();
+  var gdm=[0,31,59,90,120,151,181,212,243,273,304,334];
+  var jy=gy<=1600?0:979,gy2=gy<=1600?gy-621:gy-1600,gy3=gm>2?gy2+1:gy2;
+  var days=365*gy2+Math.floor((gy3+3)/4)-Math.floor((gy3+99)/100)+Math.floor((gy3+399)/400)-80+gd+gdm[gm-1];
+  jy+=33*Math.floor(days/12053);days%=12053;jy+=4*Math.floor(days/1461);days%=1461;
+  if(days>365){jy+=Math.floor((days-1)/365);days=(days-1)%365;}
+  var jm=days<186?1+Math.floor(days/31):7+Math.floor((days-186)/30);
+  var jd=1+(days<186?days%31:(days-186)%30);
+  return{y:jy,m:jm,d:jd,wd:WD[d.getDay()]};
+}
+function jdate(ts){var j=jal(ts);return fa(j.d)+' '+JM[j.m-1]+' '+fa(j.y);}
+function ago(ts){var s=(Date.now()-ts)/1000;
+  if(s<60)return'همین حالا';
+  if(s<3600)return fa(Math.floor(s/60))+' دقیقه پیش';
+  if(s<86400)return fa(Math.floor(s/3600))+' ساعت پیش';
+  return jdate(ts);
+}
+function timeStr(s){s=Math.max(0,Math.floor(s));var h=Math.floor(s/3600),m=Math.floor(s%3600/60),ss=s%60;var p=function(n){return String(n).padStart(2,'0');};return fa(h>0?h+':'+p(m)+':'+p(ss):p(m)+':'+p(ss));}
+/* آیکن‌های خطی */
+var I={
+grid:"<rect x='3' y='3' width='7' height='7' rx='1.5'/><rect x='14' y='3' width='7' height='7' rx='1.5'/><rect x='3' y='14' width='7' height='7' rx='1.5'/><rect x='14' y='14' width='7' height='7' rx='1.5'/>",
+users:"<path d='M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2'/><circle cx='9' cy='7' r='4'/><path d='M23 21v-2a4 4 0 0 0-3-3.87'/><path d='M16 3.13a4 4 0 0 1 0 7.75'/>",
+user:"<path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/><circle cx='12' cy='7' r='4'/>",
+book:"<path d='M4 19.5A2.5 2.5 0 0 1 6.5 17H20'/><path d='M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z'/>",
+clipboard:"<rect x='8' y='2' width='8' height='4' rx='1'/><path d='M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2'/>",
+plus:"<path d='M12 5v14M5 12h14'/>",
+edit:"<path d='M12 20h9'/><path d='M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z'/>",
+trash:"<path d='M3 6h18'/><path d='M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'/><path d='M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6'/><path d='M10 11v6M14 11v6'/>",
+copy:"<rect x='9' y='9' width='13' height='13' rx='2'/><path d='M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1'/>",
+'chev-u':"<path d='M18 15l-6-6-6 6'/>",'chev-d':"<path d='M6 9l6 6 6-6'/>",
+'chev-l':"<path d='M9 18l6-6-6-6'/>",'chev-r':"<path d='M15 18l-6-6 6-6'/>",
+clock:"<circle cx='12' cy='12' r='10'/><path d='M12 6v6l4 2'/>",
+flag:"<path d='M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z'/><path d='M4 22v-7'/>",
+check:"<path d='M20 6L9 17l-5-5'/>",x:"<path d='M18 6L6 18M6 6l12 12'/>",
+search:"<circle cx='11' cy='11' r='8'/><path d='M21 21l-4.35-4.35'/>",
+logout:"<path d='M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4'/><path d='M16 17l5-5-5-5'/><path d='M21 12H9'/>",
+moon:"<path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/>",
+sun:"<circle cx='12' cy='12' r='5'/><path d='M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42'/>",
+bar:"<path d='M6 20V15M12 20V5M18 20V10'/><path d='M2 20h20'/>",
+award:"<circle cx='12' cy='8' r='6'/><path d='M8.2 13.9L7 22l5-3 5 3-1.2-8.1'/>",
+eye:"<path d='M1 12s4-7.5 11-7.5S23 12 23 12s-4 7.5-11 7.5S1 12 1 12z'/><circle cx='12' cy='12' r='3'/>",
+download:"<path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/><path d='M7 10l5 5 5-5'/><path d='M12 15V3'/>",
+upload:"<path d='M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4'/><path d='M17 8l-5-5-5 5'/><path d='M12 3v12'/>",
+play:"<path d='M6 4l14 8-14 8V4z'/>",
+star:"<path d='M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1L12 2z'/>",
+alert:"<circle cx='12' cy='12' r='10'/><path d='M12 8v5'/><path d='M12 16.5v.01'/>",
+info:"<circle cx='12' cy='12' r='10'/><path d='M12 16v-5'/><path d='M12 8v.01'/>",
+menu:"<path d='M3 6h18M3 12h18M3 18h18'/>",
+save:"<path d='M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z'/><path d='M17 21v-8H7v8M7 3v5h8'/>",
+layers:"<path d='M12 2L2 7l10 5 10-5-10-5z'/><path d='M2 17l10 5 10-5'/><path d='M2 12l10 5 10-5'/>",
+refresh:"<path d='M23 4v6h-6'/><path d='M20.49 15a9 9 0 1 1-2.12-9.36L23 10'/>",
+key:"<path d='M21 2l-2 2m-7.6 7.6a5.5 5.5 0 1 1-7.8 7.8 5.5 5.5 0 0 1 7.8-7.8zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3-3.5 3.5z'/>",
+zap:"<path d='M13 2L3 14h9l-1 8 10-12h-9l1-8z'/>",
+list:"<path d='M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01'/>",
+send:"<path d='M22 2L11 13'/><path d='M22 2l-7 20-4-9-9-4 20-7z'/>",
+calendar:"<rect x='3' y='4' width='18' height='17' rx='2'/><path d='M16 2v4M8 2v4M3 9h18'/>"
+};
+function ic(n,s){return '<svg class="ic" width="'+(s||18)+'" height="'+(s||18)+'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+(I[n]||'')+'</svg>';}
+function shamseh(s){return '<svg width="'+s+'" height="'+s+'" viewBox="0 0 48 48" fill="none"><g stroke="currentColor" stroke-width="2.4"><rect x="13" y="13" width="22" height="22"/><rect x="13" y="13" width="22" height="22" transform="rotate(45 24 24)"/></g><circle cx="24" cy="24" r="5" fill="currentColor"/></svg>';}
+function empty(msg,icon){return '<div class="empty">'+ic(icon||'clipboard',34)+'<p>'+esc(msg)+'</p></div>';}
+var AC=null;
+function beep(){try{AC=AC||new(window.AudioContext||window.webkitAudioContext)();var o=AC.createOscillator(),g=AC.createGain();o.frequency.value=880;g.gain.value=.06;o.connect(g);g.connect(AC.destination);o.start();g.gain.exponentialRampToValueAtTime(.0001,AC.currentTime+.08);o.stop(AC.currentTime+.1);}catch(e){}}
+/* ---------- وضعیت ---------- */
+var TOKEN=localStorage.getItem('az_token')||null;
+var me=null,CUR={view:'dash',params:{}},timers=[],CLS=[],EXL=[],BANKL=[],B=null,RS=null,G_EX=null,RES_ID=null,MON_ID=null,authMode='login';
+/* ---------- API ---------- */
+async function api(path,method,body){
+  var r=await fetch('/api'+path,{method:method||'GET',headers:{'Content-Type':'application/json'},body:body!==undefined?JSON.stringify(body):undefined,credentials:'omit'});
+  if(TOKEN)r.headers.set?(''):(null);
+  if(TOKEN){r=await fetch('/api'+path,{method:method||'GET',headers:{'Content-Type':'application/json',Authorization:'Bearer '+TOKEN},body:body!==undefined?JSON.stringify(body):undefined});}
+  var d={};
+  try{d=await r.json();}catch(e){}
+  if(!r.ok)throw new Error(d.error||'خطا در ارتباط با سرور');
+  return d;
+}
+/* ---------- توست و مودال ---------- */
+function toast(msg,type){
+  var t=document.createElement('div');
+  t.className='toast t-'+(type||'ok');
+  t.innerHTML=ic(type==='err'?'alert':type==='info'?'info':'check',18)+'<span>'+esc(msg)+'</span>';
+  $('toasts').append(t);
+  setTimeout(function(){t.classList.add('out');setTimeout(function(){t.remove();},300);},3200);
+}
+function modal(html,wide){
+  $('modalRoot').innerHTML='<div class="mback" onclick="if(event.target===this)closeModal()"><div class="modal'+(wide?' wide':'')+'">'+html+'</div></div>';
+  document.body.classList.add('modal-open');
+}
+function closeModal(){$('modalRoot').innerHTML='';document.body.classList.remove('modal-open');}
+function confirmM(title,text,okLabel,onOk,danger){
+  modal('<div class="m-title">'+esc(title)+'</div><div class="m-text">'+esc(text)+'</div>'+
+  '<div class="m-actions"><button class="btn ghost" onclick="closeModal()">انصراف</button>'+
+  '<button class="btn '+(danger?'danger':'primary')+'" id="mOk">'+esc(okLabel)+'</button></div>');
+  $('mOk').onclick=onOk;
+}
+function copyText(t){
+  function done(){toast('کپی شد: '+t);}
+  function fb(){
+    var ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');done();}catch(e){toast('کپی نشد — دستی بنویسید: '+t,'info');}
+    document.body.removeChild(ta);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,fb);}
+  else fb();
+}
+/* ---------- تم و مسیریابی ---------- */
+(function(){var t=localStorage.getItem('az_theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+function toggleTheme(){
+  var c=document.documentElement.getAttribute('data-theme')==='dark'?'':'dark';
+  if(c)document.documentElement.setAttribute('data-theme',c);else document.documentElement.removeAttribute('data-theme');
+  localStorage.setItem('az_theme',c);
+  var b=$('themeBtn');if(b)b.innerHTML=ic(c==='dark'?'sun':'moon');
+}
+function clearTimers(){timers.forEach(clearInterval);timers=[];}
+var TITLES={dash:'داشبورد',classes:'کلاس‌ها',bank:'بانک سؤال',grading:'تصحیح پاسخ‌های تشریحی',monitor:'پایش زندهٔ آزمون',leader:'جدول رتبه‌بندی',profile:'پروفایل',settings:'تنظیمات',builder:'آزمون‌ساز'};
+var VIEWS={};
+function go(view,params){
+  params=params||{};
+  clearTimers();CUR={view:view,params:params};
+  var items=document.querySelectorAll('.sb-item');
+  for(var k=0;k<items.length;k++)items[k].classList.toggle('on',items[k].getAttribute('data-v')===view);
+  $('tbT').textContent=TITLES[view]||(view==='exams'?'آزمون‌ها':view==='results'?'نتایج':'');
+  $('tbD').textContent=jal(Date.now()).wd+'، '+jdate(Date.now());
+  $('view').innerHTML='<div class="vwrap" style="text-align:center;color:var(--muted);padding:70px">'+ic('refresh',26)+'</div>';
+  Promise.resolve(VIEWS[view](params)).catch(function(e){
+    $('view').innerHTML='<div class="vwrap"><div class="card">'+empty(e.message,'alert')+'</div></div>';
+  });
+}
+/* ---------- صفحهٔ ورود / ثبت‌نام ---------- */
+function renderAuth(){
+  $('app').classList.add('hidden');
+  $('auth').classList.remove('hidden');
+  var side='<div class="login-brand"><div class="girih"></div><div class="brand-inner">'+
+  '<div class="brand-logo">'+shamseh(46)+'<div><b>آزمون‌ساز</b><span>QUIZ FORGE</span></div></div>'+
+  '<h1 class="brand-h">آزمونِ کلاسِ شما، روی گوشیِ دانش‌آموزان.</h1>'+
+  '<ul class="brand-feats">'+
+  '<li>'+ic('clipboard')+' پنج نوع سؤال؛ تصحیح خودکار و دستی</li>'+
+  '<li>'+ic('clock')+' زمان‌سنج سرور و ذخیرهٔ خودکار پاسخ‌ها</li>'+
+  '<li>'+ic('bar')+' نتایج زنده، تحلیل سؤال‌ها و خروجی اکسل</li>'+
+  '<li>'+ic('users')+' ثبت‌نام دانش‌آموزان فقط با کد کلاس</li>'+
+  '</ul></div><div class="brand-foot">اجرای شخصی روی رایانهٔ معلم — داده‌ها در پوشهٔ data</div></div>';
+  var card='';
+  if(authMode==='setup'){
+    card='<h2>ساخت حساب معلم</h2><p class="lc-sub">اولین اجراست — این حساب مالکِ سامانه خواهد بود.</p>'+
+    '<div class="fld"><label>نام و نام خانوادگی</label><input id="aName" placeholder="مثلاً مریم احمدی"></div>'+
+    '<div class="fld"><label>نام کاربری (لاتین)</label><input id="aUser" class="ltr" placeholder="teacher"></div>'+
+    '<div class="fld"><label>رمز عبور (حداقل ۴ نویسه)</label><input id="aPass" type="password" class="ltr"></div>'+
+    '<button class="btn primary block" id="aGo">'+ic('check')+' ساختن حساب و ورود</button>';
+  }else if(authMode==='reg'){
+    card='<h2>ثبت‌نام دانش‌آموز</h2><p class="lc-sub">کد کلاس را از معلم خود بگیرید.</p>'+
+    '<div class="fld"><label>نام و نام خانوادگی</label><input id="aName" placeholder="نام کامل شما"></div>'+
+    '<div class="fld"><label>نام کاربری (لاتین، مثلاً sara12)</label><input id="aUser" class="ltr"></div>'+
+    '<div class="fld"><label>رمز عبور (حداقل ۴ نویسه)</label><input id="aPass" type="password" class="ltr"></div>'+
+    '<div class="fld"><label>کد کلاس</label><input id="aCode" class="ltr" placeholder="از معلم بپرسید"></div>'+
+    '<button class="btn primary block" id="aGo">'+ic('check')+' ثبت‌نام و ورود</button>'+
+    '<div class="divider"></div>'+
+    '<button class="btn ghost block" onclick="switchAuth(\'login\')">قبلاً ثبت‌نام کرده‌ام — ورود</button>';
+  }else{
+    card='<h2>ورود به سامانه</h2><p class="lc-sub">نام کاربری و رمز خود را وارد کنید</p>'+
+    '<div class="fld"><label>نام کاربری</label><input id="aUser" class="ltr"></div>'+
+    '<div class="fld"><label>رمز عبور</label><input id="aPass" type="password" class="ltr" onkeydown="if(event.key===\'Enter\')doLogin()"></div>'+
+    '<button class="btn primary block" id="aGo">'+ic('logout')+' ورود</button>'+
+    '<div class="divider"></div>'+
+    '<button class="btn ghost block" onclick="switchAuth(\'reg\')">'+ic('user')+' دانش‌آموز جدید؟ ثبت‌نام با کد کلاس</button>';
+  }
+  $('auth').innerHTML='<div class="login-wrap">'+side+'<div class="login-side"><div class="login-card" id="lc">'+card+'</div></div></div>';
+  var g=$('aGo');
+  if(g){if(authMode==='setup')g.onclick=doSetup;else if(authMode==='reg')g.onclick=doReg;else g.onclick=doLogin;}
+}
+function switchAuth(m){authMode=m;renderAuth();}
+function authErr(m){
+  toast(m,'err');
+  var c=$('lc');if(c){c.classList.add('shake');setTimeout(function(){c.classList.remove('shake');},450);}
+}
+async function doLogin(){
+  try{
+    var d=await api('/login','POST',{username:$('aUser').value,password:$('aPass').value});
+    TOKEN=d.token;localStorage.setItem('az_token',TOKEN);me=d.user;
+    toast('خوش آمدید، '+me.name);renderApp();
+  }catch(e){authErr(e.message);}
+}
+async function doSetup(){
+  try{
+    var d=await api('/register/teacher','POST',{name:$('aName').value,username:$('aUser').value,password:$('aPass').value});
+    TOKEN=d.token;localStorage.setItem('az_token',TOKEN);me=d.user;
+    toast('حساب معلم ساخته شد — خوش آمدید');renderApp();
+  }catch(e){authErr(e.message);}
+}
+async function doReg(){
+  try{
+    var d=await api('/register/student','POST',{name:$('aName').value,username:$('aUser').value,password:$('aPass').value,code:$('aCode').value});
+    TOKEN=d.token;localStorage.setItem('az_token',TOKEN);me=d.user;
+    toast('ثبت‌نام شدید — خوش آمدید');renderApp();
+  }catch(e){authErr(e.message);}
+}
+/* ---------- پوستهٔ برنامه ---------- */
+function renderApp(){
+  $('auth').classList.add('hidden');$('app').classList.remove('hidden');
+  var NAV=me.role==='teacher'
+   ?[['dash','grid','داشبورد'],['classes','layers','کلاس‌ها'],['exams','clipboard','آزمون‌ها'],['bank','book','بانک سؤال'],['grading','edit','تصحیح تشریحی'],['results','bar','نتایج و تحلیل'],['settings','settings','تنظیمات']]
+   :[['dash','grid','داشبورد'],['exams','clipboard','آزمون‌ها'],['results','award','نتایج من'],['leader','star','رتبه‌بندی'],['profile','user','پروفایل']];
+  $('app').innerHTML='<div class="app"><div class="sb-backdrop" onclick="document.body.classList.remove(\'sb-open\')"></div>'+
+  '<aside class="sidebar"><div class="sb-brand"><span class="logo">'+shamseh(38)+'</span><div><b>آزمون‌ساز</b><span>'+ROLE_FA[me.role]+' — '+esc(me.name)+'</span></div></div>'+
+  '<nav class="sb-nav">'+NAV.map(function(n){return '<div class="sb-item" data-v="'+n[0]+'" onclick="go(\''+n[0]+'\')">'+ic(n[1],19)+'<span>'+n[2]+'</span></div>';}).join('')+'</nav>'+
+  '<div class="sb-foot"><div class="sb-user">'+av(me.name)+'<div class="su-info"><b>'+esc(me.name)+'</b><span>@'+esc(me.username)+'</span></div>'+
+  '<button class="btn icon" title="خروج از حساب" onclick="logout()" style="background:transparent;border-color:rgba(255,255,255,.15);color:rgba(237,234,224,.75)">'+ic('logout',16)+'</button></div></div></aside>'+
+  '<div class="mainwrap"><header class="topbar"><div style="display:flex;align-items:center;gap:10px">'+
+  '<button class="tb-icon burger" onclick="document.body.classList.toggle(\'sb-open\')">'+ic('menu')+'</button>'+
+  '<div class="tb-title"><h1 id="tbT"></h1><div class="tb-date" id="tbD"></div></div></div>'+
+  '<div class="tb-left"><button class="tb-icon" id="themeBtn" title="روشن / تاریک" onclick="toggleTheme()">'+ic(document.documentElement.getAttribute('data-theme')==='dark'?'sun':'moon')+'</button></div></header>'+
+  '<main id="view"></main></div></div>';
+  go('dash');
+}
+function logout(){TOKEN=null;localStorage.removeItem('az_token');me=null;clearTimers();closeRunner();renderAuth();}
+/* ================= داشبورد ================= */
+VIEWS.dash=async function(){
+  var s=await api('/stats');
+  var v=$('view');
+  var recent=function(arr){return arr.length?arr.map(function(r){return '<div class="bd-row" style="padding:12px 20px"><span class="bd-ic">'+ic('clipboard',18)+'</span><div style="flex:1"><b style="font-size:13.5px">'+esc(r.name)+' — '+esc(r.exam)+'</b><p>'+ago(r.at)+'</p></div>'+scB(r.score)+'</div>';}).join(''):empty('فعالیتی ثبت نشده');};
+  if(me.role==='teacher'){
+    var origin=location.origin;
+    v.innerHTML='<div class="vwrap">'+
+    '<div class="welcome"><div><h2>سلام '+esc(me.name)+'</h2><p>آمادهٔ برگزاری آزمون امروز هستید؟</p></div><div class="w-stats">'+
+    '<div><b>'+fa(s.classes)+'</b><span>کلاس</span></div><div><b>'+fa(s.students)+'</b><span>دانش‌آموز</span></div>'+
+    '<div><b>'+fa(s.exams.total)+'</b><span>آزمون</span></div><div><b>'+fa(s.attempts)+'</b><span>پاسخ‌برگ</span></div>'+
+    '<div><b>'+(s.avg!=null?fmt(s.avg):'—')+'</b><span>میانگین</span></div></div></div>'+
+    '<div class="card" style="margin-bottom:22px"><div class="card-title">شروع کار در ۴ قدم</div>'+
+    '<ol class="steps">'+
+    '<li>در بخش «کلاس‌ها» یک کلاس بسازید و <b>کد عضویت</b> آن را به دانش‌آموزان بدهید.</li>'+
+    '<li>به بچه‌ها بگویید این آدرس را در مرورگر گوشی باز کنند و با کد کلاس ثبت‌نام کنند: <button class="codechip" onclick="copyText(\''+origin+'\')">'+esc(origin)+'</button></li>'+
+    '<li>در «آزمون‌ها» آزمون بسازید، به کلاس نسبت دهید و <b>انتشار</b> را بزنید.</li>'+
+    '<li>وقتی آزمون شروع شد «پایش زنده» را باز کنید؛ در پایان نتایج و خروجی اکسل را بگیرید.</li>'+
+    '</ol></div>'+
+    (s.pending?'<div class="card" style="border-color:var(--accent-strong);margin-bottom:22px;display:flex;align-items:center;gap:14px;flex-wrap:wrap">'+
+    '<span class="bd-ic" style="background:var(--red-soft);color:var(--red)">'+ic('edit',20)+'</span>'+
+    '<div style="flex:1"><b>'+fa(s.pending)+' پاسخ‌برگ در انتظار تصحیح تشریحی است</b><p style="font-size:12px;color:var(--muted)">نمرهٔ نهایی پس از تصحیح شما ثبت می‌شود</p></div>'+
+    '<button class="btn primary" onclick="go(\'grading\')">'+ic('edit')+' رفتن به تصحیح</button></div>':'')+
+    '<div class="card"><div class="card-title">آزمون‌های من</div>'+
+    (s.myExams.length?'<div class="tbl-wrap"><table class="tbl"><thead><tr><th>عنوان</th><th>پاسخ‌برگ</th><th>میانگین</th><th></th></tr></thead><tbody>'+
+    s.myExams.map(function(e){return '<tr><td><b>'+esc(e.title)+'</b></td><td>'+fa(e.attempts)+'</td><td>'+(e.avg!=null?scB(e.avg):'<span class="badge b-grey">—</span>')+'</td><td class="td-actions"><button class="btn ghost sm" onclick="go(\'results\',{examId:\''+e.id+'\'})">'+ic('bar',14)+' نتایج</button></td></tr>';}).join('')+
+    '</tbody></table></div>':empty('هنوز آزمونی نساخته‌اید','clipboard'))+
+    '<div style="margin-top:16px"><button class="btn primary" onclick="go(\'builder\')">'+ic('plus')+' آزمون جدید</button></div></div>'+
+    '<div class="card" style="margin-top:20px"><div class="card-title">آخرین فعالیت‌ها</div>'+recent(s.recent)+'</div></div>';
+  }else{
+    var ex=await api('/exams'),att=await api('/me/attempts');
+    v.innerHTML='<div class="vwrap">'+
+    '<div class="welcome"><div><h2>سلام '+esc(me.name)+'</h2><p>'+esc(me.className||'دانش‌آموز')+' — موفق باشی!</p></div><div class="w-stats">'+
+    '<div><b>'+fa(s.attempts)+'</b><span>آزمون</span></div><div><b>'+(s.avg!=null?fmt(s.avg):'—')+'</b><span>میانگین</span></div>'+
+    '<div><b>'+(s.best!=null?fmt(s.best):'—')+'</b><span>بهترین</span></div><div><b>'+fa(s.available)+'</b><span>آزمون فعال</span></div></div></div>'+
+    (ex.exams.length?'<div class="card" style="margin-bottom:22px"><div class="card-title">آزمون‌های فعال</div>'+
+    ex.exams.slice(0,3).map(function(e){return '<div class="exam-row"><div class="ex-info"><b>'+esc(e.title)+'</b><span>'+esc(e.teacher)+'</span>'+
+    '<div class="ex-meta"><span>'+ic('clock',14)+' '+fa(e.duration)+' دقیقه</span><span>'+ic('list',14)+' '+fa(e.questionCount)+' سؤال</span><span>'+ic('award',14)+' '+fmt(e.totalPoints)+' نمره</span></div></div>'+
+    '<div class="ex-actions"><button class="btn primary sm" onclick="startExam(\''+e.id+'\')">'+ic('play',14)+(e.openAttemptId?' ادامه':' شروع')+'</button></div></div>';}).join('')+'</div>':'')+
+    '<div class="card"><div class="card-title">آخرین نتایج</div>'+
+    (att.attempts.length?att.attempts.slice(0,5).map(function(a){return '<div class="bd-row" style="padding:12px 20px"><span class="bd-ic" style="background:'+(a.pass?'var(--green-soft)':'var(--red-soft)')+';color:'+(a.pass?'var(--green)':'var(--red)')+'">'+ic('award',18)+'</span><div style="flex:1"><b style="font-size:13.5px">'+esc(a.examTitle)+'</b><p>'+jdate(a.submittedAt)+'</p></div>'+scB(a.score20)+'</div>';}).join(''):empty('هنوز در آزمونی شرکت نکرده‌اید','award'))+
+    '</div></div>';
+  }
+};
+/* ================= کلاس‌ها ================= */
+VIEWS.classes=async function(){
+  var d=await api('/classes');CLS=d.classes;
+  var origin=location.origin;
+  var html='<div class="vwrap">'+
+  '<div class="vhead"><h1 style="font-size:20px;font-weight:800">کلاس‌های من ('+fa(CLS.length)+')</h1>'+
+  '<button class="btn primary" onclick="cForm(null)">'+ic('plus')+' کلاس جدید</button></div>'+
+  '<div class="card share-strip"><div style="flex:1;min-width:220px">'+
+  '<b style="font-size:14px">آدرسی که دانش‌آموزان باید باز کنند:</b>'+
+  '<p style="font-size:12px;color:var(--muted)">همه باید به همان Wi-Fi یا شبکه‌ای وصل باشند که رایانهٔ شما وصل است.</p></div>'+
+  '<button class="btn ghost" onclick="copyText(\''+origin+'\')">'+ic('copy')+' '+esc(origin)+'</button></div>';
+  if(!CLS.length){html+='<div class="card">'+empty('هنوز کلاسی نساخته‌اید','layers')+'</div>';}
+  else{
+    html+='<div class="grid-2">';
+    CLS.forEach(function(c,ci){
+      html+='<div class="card">'+
+      '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:12px">'+
+      '<span class="avatar" style="width:52px;height:52px;border-radius:16px;font-size:20px;background:'+avColor(c.name)+'">'+esc(String(c.name||'؟').trim().charAt(0))+'</span>'+
+      '<div style="flex:1;min-width:120px"><b style="font-size:17px">'+esc(c.name)+'</b>'+
+      '<p style="font-size:12px;color:var(--muted)">'+fa(c.students.length)+' دانش‌آموز — ساخته‌شده در '+jdate(c.createdAt)+'</p></div>'+
+      '<button class="codechip big" onclick="copyText(\''+c.code+'\')" title="کپی کد عضویت">'+ic('key',15)+' کد عضویت: <b class="ltr">'+esc(c.code)+'</b></button>'+
+      '</div>'+
+      '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">'+
+      '<div class="avs">'+c.students.slice(0,6).map(function(st){return av(st.name,'sm');}).join('')+
+      (c.students.length>6?'<span class="avatar sm more">+'+fa(c.students.length-6)+'</span>':'')+'</div>'+
+      '<div class="td-actions" style="flex:1">'+
+      '<button class="btn ghost sm" onclick="studentMgr('+ci+')">'+ic('users',14)+' دانش‌آموزان</button>'+
+      '<button class="btn ghost sm" onclick="cForm('+ci+')">'+ic('edit',14)+' ویرایش</button>'+
+      '<button class="btn ghost sm" onclick="cDel('+ci+')">'+ic('trash',14)+' حذف</button>'+
+      '</div></div></div>';
+    });
+    html+='</div>';
+  }
+  html+='</div>';
+  $('view').innerHTML=html;
+};
+function cForm(ci){
+  var c=ci==null?null:CLS[ci];
+  var suggest='';var A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  for(var i=0;i<5;i++)suggest+=A[Math.floor(Math.random()*A.length)];
+  modal('<div class="m-title">'+(c?'ویرایش کلاس':'کلاس جدید')+'</div>'+
+  '<div class="fld"><label>نام کلاس</label><input id="cfName" value="'+(c?esc(c.name):'')+'" placeholder="مثلاً هفتم آ"></div>'+
+  '<div class="fld"><label>کد عضویت (دانش‌آموزان با این کد ثبت‌نام می‌کنند)</label><input id="cfCode" class="ltr" value="'+(c?esc(c.code):suggest)+'"></div>'+
+  '<div class="m-actions"><button class="btn ghost" onclick="closeModal()">انصراف</button><button class="btn primary" id="cfGo">'+ic('save')+' ذخیره</button></div>');
+  $('cfGo').onclick=async function(){
+    try{
+      if(c)await api('/classes/'+c.id,'PATCH',{name:$('cfName').value,code:$('cfCode').value});
+      else await api('/classes','POST',{name:$('cfName').value,code:$('cfCode').value});
+      toast(c?'کلاس ویرایش شد':'کلاس ساخته شد');closeModal();go('classes');
+    }catch(e){toast(e.message,'err');}
+  };
+}
+function cDel(ci){
+  var c=CLS[ci];
+  confirmM('حذف کلاس','کلاس «'+c.name+'» حذف شود؟ دانش‌آموزان آن بدون کلاس می‌شوند.','حذف کن',async function(){
+    try{await api('/classes/'+c.id,'DELETE');toast('کلاس حذف شد');closeModal();go('classes');}catch(e){toast(e.message,'err');}
+  },true);
+}
+function studentMgr(ci){
+  var c=CLS[ci];
+  var rows=c.students.map(function(st){
+    return '<div class="stu-row"><span class="avatar sm" style="background:'+avColor(st.name)+'">'+esc(String(st.name).charAt(0))+'</span>'+
+    '<div style="flex:1;min-width:0"><b>'+esc(st.name)+'</b> <span style="font-size:11.5px;color:var(--muted)" class="ltr">@'+esc(st.username)+'</span></div>'+
+    '<div class="td-actions">'+
+    '<button class="btn ghost sm" onclick="stuRename(\''+st.id+'\')">'+ic('edit',13)+' نام</button>'+
+    '<button class="btn ghost sm" onclick="stuPass(\''+st.id+'\')">'+ic('key',13)+' رمز</button>'+
+    '<button class="btn ghost sm" onclick="stuRemove('+ci+',\''+st.id+'\')">'+ic('x',13)+' حذف از کلاس</button>'+
+    '</div></div>';
+  }).join('');
+  modal('<div class="m-title">دانش‌آموزان کلاس '+esc(c.name)+'</div>'+
+  '<p class="m-sub">کد عضویت برای ثبت‌نامِ دانش‌آموز جدید: <b class="ltr">'+esc(c.code)+'</b></p>'+
+  (rows||empty('هنوز کسی ثبت‌نام نکرده — کد را روی تخته بنویسید!','users'))+
+  '<div class="m-actions"><button class="btn ghost" onclick="closeModal()">بستن</button></div>',true);
+}
+function stuRename(id){
+  modal('<div class="m-title">تغییر نام دانش‌آموز</div>'+
+  '<div class="fld"><label>نام جدید</label><input id="srN"></div>'+
+  '<div class="m-actions"><button class="btn ghost" onclick="closeModal()">انصراف</button><button class="btn primary" id="srGo">'+ic('save')+' ذخیره</button></div>');
+  $('srGo').onclick=async function(){
+    try{await api('/students/'+id,'PATCH',{name:$('srN').value});toast('نام تغییر کرد');closeModal();go('classes');}catch(e){toast(e.message,'err');}
+  };
+}
+function stuPass(id){
+  modal('<div class="m-title">تعیین رمز جدید برای دانش‌آموز</div>'+
+  '<p class="m-sub">مثلاً وقتی رمزش را فراموش کرده — رمز را به او بگویید.</p>'+
+  '<div class="fld"><label>رمز جدید (حداقل ۴ نویسه)</label><input id="spP" class="ltr" value="1234"></div>'+
+  '<div class="m-actions"><button class="btn ghost" onclick="closeModal()">انصراف</button><button class="btn primary" id="spGo">'+ic('key')+' ثبت</button></div>');
+  $('spGo').onclick=async function(){
+    try{await api('/students/'+id+'/reset-pass','POST',{password:$('spP').value});toast('رمز جدید ثبت شد');closeModal();}catch(e){toast(e.message,'err');}
+  };
+}
+function stuRemove(ci,id){
+  var c=CLS[ci];
+  confirmM('حذف از کلاس','این دانش‌آموز از کلاس «'+c.name+'» خارج شود؟ می‌تواند با کد کلاس دیگری دوباره عضو شود.','خارج کن',async function(){
+    try{await api('/classes/'+c.id+'/remove-student','POST',{userId:id});toast('از کلاس خارج شد');closeModal();go('classes');}catch(e){toast(e.message,'err');}
+  },true);
+}
+/* ================= آزمون‌ها ================= */
+VIEWS.exams=async function(){
+  var d=await api('/exams');EXL=d.exams;
+  var v=$('view');
+  if(me.role==='student'){
+    v.innerHTML='<div class="vwrap"><div class="vhead"><h1 style="font-size:20px;font-weight:800">آزمون‌های من ('+fa(EXL.length)+')</h1></div><div class="card p0">'+
+    (EXL.length?EXL.map(function(e){
+      var used=e.attemptLimit>0&&e.myAttempts>=e.attemptLimit&&!e.openAttemptId;
+      return '<div class="exam-row"><div class="ex-info"><b>'+esc(e.title)+'</b><span>'+esc(e.subject)+' — '+esc(e.teacher)+'</span>'+
+      '<div class="ex-meta"><span>'+ic('clock',14)+' '+fa(e.duration)+' دقیقه</span><span>'+ic('list',14)+' '+fa(e.questionCount)+' سؤال</span>'+
+      '<span>'+ic('award',14)+' '+fmt(e.totalPoints)+' نمره</span><span>'+ic('refresh',14)+(e.attemptLimit?fa(e.myAttempts)+' از '+fa(e.attemptLimit):' نامحدود')+'</span>'+
+      (e.negativeMark?'<span class="badge b-red">نمرهٔ منفی دارد</span>':'')+'</div></div>'+
+      (e.myBest!=null?'<div class="ex-stats"><div><b>'+fmt(e.myBest)+'</b><span>بهترین نمره</span></div></div>':'')+
+      '<div class="ex-actions">'+
+      (e.openAttemptId?'<button class="btn primary sm" onclick="startExam(\''+e.id+'\')">'+ic('play',14)+' ادامهٔ آزمون</button>':
+       used?'<button class="btn ghost sm" disabled>'+ic('check',14)+' تکمیل شده</button>':
+       '<button class="btn primary sm" onclick="startExam(\''+e.id+'\')">'+ic('play',14)+' شروع آزمون</button>')+
+      '</div></div>';
+    }).join(''):empty('در حال حاضر آزمون فعالی برای کلاس شما وجود ندارد','clipboard'))+'</div></div>';
+    return;
+  }
+  v.innerHTML='<div class="vwrap"><div class="vhead"><h1 style="font-size:20px;font-weight:800">آزمون‌های من ('+fa(EXL.length)+')</h1>'+
+  '<button class="btn primary" onclick="go(\'builder\')">'+ic('plus')+' آزمون جدید</button></div><div class="card p0">'+
+  (EXL.length?EXL.map(function(e,i){
+    var btns=[];
+    if(e.status==='draft')btns.push('<button class="btn primary sm" onclick="xStatus('+i+',\'published\')">'+ic('play',14)+' انتشار</button>');
+    if(e.status==='published')btns.push('<button class="btn ghost sm" onclick="xStatus('+i+',\'closed\')">'+ic('x',14)+' بستن</button>');
+    if(e.status==='closed')btns.push('<button class="btn ghost sm" onclick="xStatus('+i+',\'published\')">'+ic('refresh',14)+' بازگشایی</button>');
+    btns.push('<button class="btn ghost sm" title="ویرایش" onclick="go(\'builder\',{id:\''+e.id+'\'})">'+ic('edit',14)+'</button>');
+    btns.push('<button class="btn ghost sm" title="پایش زنده" onclick="go(\'monitor\',{examId:\''+e.id+'\'})">'+ic('eye',14)+'</button>');
+    btns.push('<button class="btn ghost sm" title="نتایج" onclick="go(\'results\',{examId:\''+e.id+'\'})">'+ic('bar',14)+'</button>');
+    btns.push('<button class="btn ghost sm" title="خروجی CSV" onclick="expCsv(\''+e.id+'\')">'+ic('download',14)+'</button>');
+    btns.push('<button class="btn ghost sm" title="تکرار" onclick="xDup(\''+e.id+'\')">'+ic('copy',14)+'</button>');
+    btns.push('<button class="btn ghost sm" title="حذف" onclick="xDel('+i+')">'+ic('trash',14)+'</button>');
+    return '<div class="exam-row"><div class="ex-info">'+
+    '<div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap"><span class="st-dot '+e.status+'"></span><b>'+esc(e.title)+'</b>'+
+    '<span class="badge '+stCls(e.status)+'">'+stFa(e.status)+'</span>'+
+    (e.pendingEssays?'<span class="badge b-saffron">'+fa(e.pendingEssays)+' در انتظار تصحیح</span>':'')+'</div>'+
+    '<span>'+esc(e.subject)+' — '+(e.classes.map(esc).join('، ')||'بدون کلاس')+'</span>'+
+    '<div class="ex-meta"><span>'+ic('clock',14)+' '+fa(e.duration)+' دقیقه</span><span>'+ic('list',14)+' '+fa(e.questionCount)+' سؤال</span>'+
+    '<span>'+ic('award',14)+' '+fmt(e.totalPoints)+' نمره</span><span>'+ic('refresh',14)+' سقف '+(e.attemptLimit?fa(e.attemptLimit):'∞')+'</span></div></div>'+
+    '<div class="ex-stats"><div><b>'+fa(e.attempts)+'</b><span>شرکت‌کننده</span></div>'+
+    (e.inProgress?'<div><b style="color:var(--accent-strong)">'+fa(e.inProgress)+'</b><span>در حال آزمون</span></div>':'')+
+    '<div><b>'+(e.avg!=null?fmt(e.avg):'—')+'</b><span>میانگین</span></div></div>'+
+    '<div class="ex-actions">'+btns.join('')+'</div></div>';
+  }).join(''):empty('هنوز آزمونی نساخته‌اید — با دکمهٔ «آزمون جدید» شروع کنید','clipboard'))+'</div></div>';
+};
+function xStatus(i,st){
+  var e=EXL[i];
+  var msg=st==='published'?'آزمون برای دانش‌آموزان کلاس‌های انتخاب‌شده منتشر شود؟':
+    st==='closed'?'آزمون بسته شود؟ آزمون‌های در جریان همان لحظه تحویل و تصحیح می‌شوند.':'آزمون دوباره منتشر شود؟';
+  confirmM('تغییر وضعیت آزمون',msg,'تأیید',async function(){
+    try{
+      await api('/exams/'+e.id+'/status','POST',{status:st});
+      toast(st==='published'?'آزمون منتشر شد':st==='closed'?'آزمون بسته شد':'آزمون بازگشایی شد');
+      closeModal();go('exams');
+    }catch(err){toast(err.message,'err');}
+  });
+}
+async function xDup(id){try{await api('/exams/'+id+'/duplicate','POST');toast('نسخهٔ تکراری به‌عنوان پیش‌نویس ساخته شد');go('exams');}catch(e){toast(e.message,'err');}}
+function xDel(i){
+  var e=EXL[i];
+  confirmM('حذف آزمون','آزمون «'+e.title+'» و همهٔ نتایج آن حذف شود؟','حذف کن',async function(){
+    try{await api('/exams/'+e.id,'DELETE');toast('آزمون حذف شد');closeModal();go('exams');}catch(err){toast(err.message,'err');}
+  },true);
+}
+function expCsv(id){location.href='/api/exams/'+id+'/export?t='+encodeURIComponent(TOKEN);}
+/* ================= آزمون‌ساز ================= */
+function rid(){return 'q'+Math.random().toString(36).slice(2,10);}
+function oid(){return 'o'+Math.random().toString(36).slice(2,10);}
+VIEWS.builder=async function(params){
+  var ex=null;
+  if(params.id){try{ex=(await api('/exams/'+params.id)).exam;}catch(e){toast(e.message,'err');}}
+  var cd=await api('/classes');CLS=cd.classes;
+  B=ex?clone(ex):{id:null,title:'',subject:'عمومی',classIds:[],duration:10,attemptLimit:1,passMark:10,shuffleQ:true,shuffleO:true,showAnswers:true,negativeMark:false,questions:[]};
+  $('view').innerHTML='<div class="vwrap">'+
+  '<div class="bh-top"><input class="exam-title-input" id="bTitle" placeholder="عنوان آزمون…" value="'+esc(B.title)+'" oninput="B.title=this.value">'+
+  '<button class="btn ghost" onclick="go(\'exams\')">بازگشت</button>'+
+  '<button class="btn ghost" onclick="bSave(false)">'+ic('save')+' ذخیره پیش‌نویس</button>'+
+  '<button class="btn primary" onclick="bSave(true)">'+ic('play')+' ذخیره و انتشار</button></div>'+
+  (B.status&&B.status!=='draft'?'<div class="badge b-saffron" style="margin-bottom:14px">'+ic('alert',13)+' این آزمون '+stFa(B.status)+' است — اگر کسی در حال آزمون است، سؤال‌هایش را تغییر ندهید.</div>':'')+
+  '<div class="card" style="margin-bottom:20px"><div class="bh-meta">'+
+  '<label>درس<input list="subjects" value="'+esc(B.subject)+'" oninput="B.subject=this.value"></label>'+
+  '<label>مدت (دقیقه)<input type="number" min="1" value="'+(+B.duration||10)+'" oninput="B.duration=num(this.value)"></label>'+
+  '<label>سقف شرکت<input type="number" min="0" value="'+(+B.attemptLimit||0)+'" oninput="B.attemptLimit=num(this.value)"></label>'+
+  '<label>نمرهٔ قبولی<input type="number" min="0" max="20" value="'+(+B.passMark||10)+'" oninput="B.passMark=num(this.value)"></label>'+
+  '</div><div class="bh-toggles">'+
+  '<label class="switch"><input type="checkbox"'+(B.shuffleQ?' checked':'')+' onchange="B.shuffleQ=this.checked"><span class="tr"></span>به‌هم‌ریختن ترتیب سؤال</label>'+
+  '<label class="switch"><input type="checkbox"'+(B.shuffleO?' checked':'')+' onchange="B.shuffleO=this.checked"><span class="tr"></span>به‌هم‌ریختن گزینه‌ها</label>'+
+  '<label class="switch"><input type="checkbox"'+(B.showAnswers?' checked':'')+' onchange="B.showAnswers=this.checked"><span class="tr"></span>نمایش پاسخ‌نامه به دانش‌آموز</label>'+
+  '<label class="switch"><input type="checkbox"'+(B.negativeMark?' checked':'')+' onchange="B.negativeMark=this.checked"><span class="tr"></span>نمرهٔ منفی (۲۵٪)</label></div>'+
+  '<div class="bh-classes"><span>کلاس‌های هدف:</span>'+
+  (CLS.length?CLS.map(function(c){return '<button class="chip'+(B.classIds.indexOf(c.id)>=0?' on':'')+'" id="bcls-'+c.id+'" onclick="bToggleClass(\''+c.id+'\')">'+esc(c.name)+'</button>';}).join(''):'<span class="badge b-red">ابتدا در بخش کلاس‌ها، کلاس بسازید</span>')+
+  '</div><div class="bh-stats" id="bStats"></div></div>'+
+  '<div class="qlist" id="bList"></div>'+
+  '<div class="card add-q" style="margin-top:20px"><p>افزودن سؤال جدید</p><div class="add-q-row">'+
+  '<button class="aq-btn" onclick="bAddQ(\'mcq\')">چهارگزینه‌ای</button>'+
+  '<button class="aq-btn" onclick="bAddQ(\'multi\')">چندگزینه‌ای</button>'+
+  '<button class="aq-btn" onclick="bAddQ(\'tf\')">صحیح / غلط</button>'+
+  '<button class="aq-btn" onclick="bAddQ(\'blank\')">جای خالی</button>'+
+  '<button class="aq-btn" onclick="bAddQ(\'essay\')">تشریحی</button>'+
+  '<button class="aq-btn from-bank" onclick="bOpenBank()">'+ic('book',14)+' از بانک سؤال</button>'+
+  '</div><p class="hint">در سؤال چندگزینه‌ای، نمره بر اساس نسبت گزینه‌های درستِ انتخاب‌شده به غلط محاسبه می‌شود. سؤال‌های خوب را با دکمهٔ کتاب کنار هر سؤال در بانک ذخیره کنید تا دوباره استفاده شوند.</p></div></div>';
+  bRender();
+};
+function bStats(){$('bStats').innerHTML=fa(B.questions.length)+' سؤال • '+fmt(B.questions.reduce(function(s,q){return s+num(q.points);},0))+' نمرهٔ کل';}
+function bRender(){$('bList').innerHTML=B.questions.map(function(q,i){return bq(i);}).join('')||empty('هنوز سؤالی اضافه نشده — از دکمه‌های زیر شروع کنید','plus');bStats();}
+function bq(i){
+  var q=B.questions[i],body='';
+  if(q.type==='mcq'||q.type==='multi'){
+    body='<div class="opts">'+q.options.map(function(o,oi){
+      return '<div class="opt-row'+(q.correct.indexOf(o.id)>=0?' checked':'')+'">'+
+      '<button class="opt-mark '+(q.type==='multi'?'check':'radio')+'" onclick="bCor('+i+','+oi+')" title="علامت‌زدن پاسخ درست"></button>'+
+      '<input value="'+esc(o.text)+'" placeholder="گزینهٔ '+fa(oi+1)+'" oninput="B.questions['+i+'].options['+oi+'].text=this.value">'+
+      (q.options.length>2?'<button class="opt-del" onclick="bDelOpt('+i+','+oi+')" title="حذف گزینه">'+ic('x',14)+'</button>':'')+
+      '</div>';
+    }).join('')+'</div>'+
+    '<button class="add-opt" onclick="bAddOpt('+i+')">'+ic('plus',13)+' افزودن گزینه</button>';
+  }else if(q.type==='tf'){
+    body='<div class="opts">'+
+    '<div class="opt-row'+(q.correct[0]==='t'?' checked':'')+'"><button class="opt-mark radio" onclick="bTF('+i+',\'t\')" title="پاسخ درست"></button><input value="صحیح" disabled></div>'+
+    '<div class="opt-row'+(q.correct[0]==='f'?' checked':'')+'"><button class="opt-mark radio" onclick="bTF('+i+',\'f\')" title="پاسخ درست"></button><input value="غلط" disabled></div></div>';
+  }else if(q.type==='blank'){
+    body='<div class="fld" style="margin:0"><label>پاسخ‌های قابل‌قبول — با | جدا کنید (فارسی و انگلیسی و هر دو نوع رقم قبول‌اند)</label><input value="'+esc(q.accept||'')+'" placeholder="مثلاً: ۲|دو" oninput="B.questions['+i+'].accept=this.value"></div>';
+  }else{
+    body='<div class="fld" style="margin:0"><label>راهنمای تصحیح (فقط شما می‌بینید)</label><input value="'+esc(q.guideline||'')+'" placeholder="معیار نمره‌دهی…" oninput="B.questions['+i+'].guideline=this.value"></div>';
+  }
+  return '<div class="card q-card"><div class="q-head"><span class="q-num">سؤال '+fa(i+1)+'</span>'+
+  '<span class="badge b-grey">'+QTYPE[q.type]+'</span>'+
+  '<span class="pts">بارم <input type="number" min="0.5" step="0.5" value="'+(+q.points||2)+'" oninput="B.questions['+i+'].points=num(this.value);bStats()"></span>'+
+  '<span class="q-tools">'+
+  '<button title="انتقال به بالا"'+(i===0?' disabled':'')+' onclick="bMove('+i+',-1)">'+ic('chev-u',15)+'</button>'+
+  '<button title="انتقال به پایین"'+(i===B.questions.length-1?' disabled':'')+' onclick="bMove('+i+',1)">'+ic('chev-d',15)+'</button>'+
+  '<button title="تکرار سؤال" onclick="bDup('+i+')">'+ic('copy',15)+'</button>'+
+  '<button title="ذخیره در بانک سؤال" onclick="bToBank('+i+')">'+ic('book',15)+'</button>'+
+  '<button class="danger" title="حذف" onclick="bDel('+i+')">'+ic('trash',15)+'</button>'+
+  '</span></div>'+
+  '<textarea class="q-text" placeholder="متن سؤال…" oninput="B.questions['+i+'].text=this.value">'+esc(q.text)+'</textarea>'+body+
+  (q.type!=='essay'?'<input class="q-expl" placeholder="توضیح پاسخ (در پاسخ‌نامهٔ دانش‌آموز نمایش داده می‌شود)" value="'+esc(q.explanation||'')+'" oninput="B.questions['+i+'].explanation=this.value">':'')+
+  '</div>';
+}
+function bToggleClass(id){
+  var ix=B.classIds.indexOf(id);
+  if(ix>=0)B.classIds.splice(ix,1);else B.classIds.push(id);
+  var el=$('bcls-'+id);if(el)el.classList.toggle('on');
+}
+function bAddQ(type){
+  var q={id:rid(),type:type,text:'',points:2,explanation:'',accept:'',guideline:'',correct:[],options:[]};
+  if(type==='mcq'||type==='multi')q.options=[0,1,2,3].map(function(){return{id:oid(),text:''};});
+  if(type==='tf')q.correct=['t'];
+  B.questions.push(q);bRender();
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function bAddOpt(i){B.questions[i].options.push({id:oid(),text:''});bRender();}
+function bDelOpt(i,oi){B.questions[i].options.splice(oi,1);bRender();}
+function bCor(i,oi){
+  var q=B.questions[i],id=q.options[oi].id;
+  if(q.type==='mcq')q.correct=[id];
+  else{var ix=q.correct.indexOf(id);if(ix>=0)q.correct.splice(ix,1);else q.correct.push(id);}
+  bRender();
+}
+function bTF(i,v){B.questions[i].correct=[v];bRender();}
+function bMove(i,d){var q=B.questions.splice(i,1)[0];B.questions.splice(i+d,0,q);bRender();}
+function bDup(i){
+  var c=clone(B.questions[i]);c.id=rid();
+  var old=B.questions[i].options;
+  c.options=c.options.map(function(o){return{text:o.text,id:oid()};});
+  c.correct=c.correct.map(function(cid){var k=old.findIndex(function(o){return o.id===cid;});return k>=0?c.options[k].id:c.options[0].id;});
+  B.questions.splice(i+1,0,c);bRender();
+}
+function bDel(i){B.questions.splice(i,1);bRender();}
+async function bToBank(i){
+  try{await api('/bank','POST',Object.assign(clone(B.questions[i]),{subject:B.subject}));toast('سؤال به بانک اضافه شد');}catch(e){toast(e.message,'err');}
+}
+async function bSave(publish){
+  if(!String(B.title||'').trim())return toast('عنوان آزمون را وارد کنید','err');
+  if(!B.questions.length)return toast('حداقل یک سؤال اضافه کنید','err');
+  var body={title:B.title,subject:B.subject,duration:B.duration,attemptLimit:B.attemptLimit,passMark:B.passMark,shuffleQ:B.shuffleQ,shuffleO:B.shuffleO,showAnswers:B.showAnswers,negativeMark:B.negativeMark,classIds:B.classIds,questions:B.questions};
+  try{
+    var d=B.id?await api('/exams/'+B.id,'PATCH',body):await api('/exams','POST',body);
+    if(publish){await api('/exams/'+d.exam.id+'/status','POST',{status:'published'});toast('آزمون ذخیره و منتشر شد — دانش‌آموزان حالا می‌بینند');}
+    else toast('پیش‌نویس ذخیره شد');
+    go('exams');
+  }catch(e){toast(e.message,'err');}
+}
+async function bOpenBank(){
+  try{
+    var d=await api('/bank');BANKL=d.questions;
+    modal('<div class="m-title">بانک سؤال</div><p class="m-sub">یک سؤال را برای افزودن به آزمون انتخاب کنید</p>'+
+    '<div style="max-height:420px;overflow-y:auto">'+
+    (BANKL.length?BANKL.map(function(q,i){return '<div class="bank-row"><div><p>'+esc(q.text||'بدون متن')+'</p><span>'+QTYPE[q.type]+' — '+esc(q.subject)+' — '+fmt(q.points)+' نمره</span></div>'+
+    '<button class="btn primary sm" onclick="bankPick('+i+')">'+ic('plus',13)+' افزودن</button></div>';}).join(''):empty('بانک خالی است — از داخل آزمون‌ساز، سؤال‌ها را با دکمهٔ کتاب ذخیره کنید','book'))+
+    '</div><div class="m-actions"><button class="btn ghost" onclick="closeModal()">بستن</button></div>',true);
+  }catch(e){toast(e.message,'err');}
+}
+function bankPick(i){
+  var q=clone(BANKL[i]);q.id=rid();
+  var old=q.options||[];
+  q.options=old.map(function(o){return{text:o.text,id:oid()};});
+  q.correct=(q.correct||[]).map(function(cid){var k=old.findIndex(function(o){return o.id===cid;});return k>=0?q.options[k].id:q.options[0].id;});
+  B.questions.push(q);closeModal();bRender();toast('سؤال از بانک افزوده شد');
+}
+/* ================= بانک سؤال ================= */
+VIEWS.bank=async function(){
+  var d=await api('/bank');BANKL=d.questions;
+  $('view').innerHTML='<div class="vwrap"><div class="vhead"><h1 style="font-size:20px;font-weight:800">بانک سؤال ('+fa(BANKL.length)+')</h1></div>'+
+  '<div class="card"><p style="font-size:13px;color:var(--ink2);margin-bottom:14px">هنگام ساخت آزمون، با دکمهٔ '+ic('book',13)+' کنار هر سؤال، آن را در بانک ذخیره کنید تا در آزمون‌های بعدی با دکمهٔ «از بانک سؤال» دوباره استفاده شود.</p></div>'+
+  '<div class="card p0" style="margin-top:20px">'+
+  (BANKL.length?BANKL.map(function(q){return '<div class="bank-row"><div><p>'+esc(q.text||'بدون متن')+'</p>'+
+  '<span>'+QTYPE[q.type]+' — '+esc(q.subject)+' — '+fmt(q.points)+' نمره</span></div>'+
+  '<div class="td-actions"><button class="btn icon" title="حذف" onclick="bkDel(\''+q.id+'\')">'+ic('trash',15)+'</button></div></div>';}).join(''):empty('بانک خالی است','book'))+
+  '</div></div>';
+};
+function bkDel(id){
+  confirmM('حذف سؤال','این سؤال از بانک حذف شود؟ (آزمون‌های ساخته‌شده از آن تغییری نمی‌کنند)','حذف کن',async function(){
+    try{await api('/bank/'+id,'DELETE');toast('حذف شد');closeModal();go('bank');}catch(e){toast(e.message,'err');}
+  },true);
+}
+/* ================= تصحیح تشریحی ================= */
+function ansText(q){
+  if(q.myAnswer==null)return'— بدون پاسخ —';
+  if(q.type==='tf')return q.myAnswer==='t'?'صحیح':'غلط';
+  if(Array.isArray(q.myAnswer))return q.myAnswer.map(function(a){var o=(q.options||[]).find(function(x){return x.id===a;});return o?o.text:'؟';}).join('، ');
+  if(q.type==='mcq'){var o=(q.options||[]).find(function(x){return x.id===String(q.myAnswer);});return o?o.text:String(q.myAnswer);}
+  return String(q.myAnswer);
+}
+VIEWS.grading=async function(){
+  var d=await api('/grading');
+  $('view').innerHTML='<div class="vwrap"><div class="vhead"><h1 style="font-size:20px;font-weight:800">صف تصحیح تشریحی ('+fa(d.items.length)+')</h1></div>'+
+  '<div class="card p0">'+
+  (d.items.length?d.items.map(function(it){return '<div class="exam-row"><div class="ex-info"><b>'+esc(it.student)+'</b><span>'+esc(it.examTitle)+'</span>'+
+  '<div class="ex-meta"><span>'+ic('clock',14)+' تحویل: '+jdate(it.submittedAt)+'</span></div></div>'+
+  '<div class="ex-stats"><div><b>'+fa(it.pending)+'</b><span>سؤال تشریحی</span></div></div>'+
+  '<div class="ex-actions"><button class="btn primary sm" onclick="gOpen(\''+it.examId+'\',\''+it.attemptId+'\')">'+ic('edit',14)+' تصحیح</button></div></div>';}).join(''):
+  empty('صف تصحیح خالی است — همهٔ پاسخ‌برگ‌ها نهایی شده‌اند','check'))+'</div></div>';
+};
+async function gOpen(examId,attemptId){
+  try{
+    G_EX=examId;
+    var p=await api('/exams/'+examId+'/attempts/'+attemptId);
+    modal('<div class="m-title">پاسخ‌برگ — '+esc(p.student.name)+'</div>'+
+    '<p class="m-sub">'+esc(p.student.className)+' — '+esc(p.exam.title)+' — نمرهٔ فعلی: <b>'+fmt(p.attempt.score20)+' از ۲۰</b> — مدت: '+fa(p.attempt.spentMin)+' دقیقه</p>'+
+    p.questions.map(function(q,qi){
+      var block;
+      if(q.type==='essay'){
+        block='<div class="gr-stu">'+esc(q.myAnswer==null?'— بدون پاسخ —':String(q.myAnswer))+'</div>'+
+        (q.guideline?'<div class="gr-guide">'+ic('info',13)+' راهنمای خودتان: '+esc(q.guideline)+'</div>':'')+
+        '<div class="gr-score"><label>نمرهٔ این سؤال: '+
+        '<input type="number" min="0" max="'+q.points+'" step="0.25" id="gs-'+q.id+'" value="'+(q.myScore==null?Math.round(q.points/2*100)/100:q.myScore)+'">'+
+        '<button class="btn primary sm" onclick="gSave(\''+attemptId+'\',\''+q.id+'\',\'gs-'+q.id+'\')">'+ic('save',13)+' ثبت</button></label></div>';
+      }else{
+        var corrTxt=q.type==='tf'?(q.correct[0]==='t'?'صحیح':'غلط'):q.type==='blank'?(q.accept||''):(q.options||[]).filter(function(o){return q.correct.indexOf(o.id)>=0;}).map(function(o){return o.text;}).join('، ');
+        var bg=(q.myScore!=null&&q.myScore>=q.points)?'var(--green-soft)':((q.myScore!=null&&q.myScore<=0)?'var(--red-soft)':'var(--hover)');
+        block='<div class="gr-stu" style="background:'+bg+'">'+esc(ansText(q))+'</div>'+
+        '<div class="sh-expl"><b>پاسخ درست:</b> '+esc(corrTxt)+'</div>';
+      }
+      return '<div class="gr-q"><div class="gr-meta"><span>سؤال '+fa(qi+1)+'</span><span>'+QTYPE[q.type]+'</span><span>'+fmt(q.points)+' نمره</span>'+
+      '<span style="margin-inline-start:auto">'+(q.myScore==null?'<span class="badge b-saffron">در انتظار</span>':'<span class="badge b-green">'+fmt(q.myScore)+'</span>')+'</span></div>'+
+      '<div class="gr-text">'+esc(q.text)+'</div>'+block+'</div>';
+    }).join('')+
+    '<div class="m-actions"><button class="btn ghost" onclick="closeModal()">بستن</button></div>',true);
+  }catch(e){toast(e.message,'err');}
+}
+async function gSave(aid,qid,inId){
+  try{
+    var r=await api('/attempts/'+aid+'/grade','POST',{qid:qid,score:num($(inId).value)});
+    toast(r.status==='graded'?'تصحیح کامل شد — نمرهٔ نهایی: '+fmt(r.score20):'نمره ثبت شد: '+fmt(r.score));
+    gOpen(G_EX,aid);
+  }catch(e){toast(e.message,'err');}
+}
+/* ================= نتایج ================= */
+VIEWS.results=async function(params){
+  if(me.role==='student'){
+    var d=await api('/me/attempts');
+    $('view').innerHTML='<div class="vwrap"><div class="vhead"><h1 style="font-size:20px;font-weight:800">نتایج من ('+fa(d.attempts.length)+')</h1></div>'+
+    '<div class="card p0">'+
+    (d.attempts.length?d.attempts.map(function(a){return '<div class="exam-row"><div class="ex-info"><b>'+esc(a.examTitle)+'</b><span>'+esc(a.subject)+'</span>'+
+    '<div class="ex-meta"><span>'+ic('clock',14)+' '+jdate(a.submittedAt)+'</span>'+
+    (a.status==='submitted'?'<span class="badge b-saffron">در انتظار تصحیح تشریحی</span>':'<span class="badge b-green">نهایی</span>')+'</div></div>'+
+    scB(a.score20)+
+    '<div class="ex-actions"><button class="btn ghost sm" onclick="openReview(\''+a.id+'\')">'+ic('eye',14)+' پاسخ‌نامه</button></div></div>';}).join(''):
+    empty('هنوز نتیجه‌ای ندارید','award'))+'</div></div>';
+    return;
+  }
+  var d=await api('/exams');EXL=d.exams;
+  if(!EXL.length){$('view').innerHTML='<div class="vwrap"><div class="card">'+empty('آزمونی برای نمایش نیست','clipboard')+'</div></div>';return;}
+  var sel=params.examId||EXL[0].id;
+  $('view').innerHTML='<div class="vwrap"><div class="vhead no-print"><div class="vh-actions">'+
+  '<div class="searchbox" style="min-width:290px">'+ic('list',16)+
+  '<select id="resSel" style="border:none;background:none;outline:none;flex:1;font-family:inherit;font-size:13.5px;color:var(--ink)">'+
+  EXL.map(function(e){return '<option value="'+e.id+'"'+(e.id===sel?' selected':'')+'>'+esc(e.title)+'</option>';}).join('')+'</select></div></div>'+
+  '<button class="btn ghost" id="resCsv">'+ic('download')+' اکسل</button>'+
+  '<button class="btn ghost" onclick="window.print()">'+ic('printer',14)+' چاپ</button></div>'+
+  '<div id="resBody"></div></div>';
+  $('resSel').onchange=function(e){resLoad(e.target.value);};
+  $('resCsv').onclick=function(){expCsv($('resSel').value);};
+  await resLoad(sel);
+};
+async function resLoad(id){
+  RES_ID=id;
+  $('resBody').innerHTML='<div style="text-align:center;padding:60px;color:var(--muted)">'+ic('refresh',24)+'</div>';
+  var att=await api('/exams/'+id+'/attempts');
+  var an=await api('/exams/'+id+'/analytics');
+  var BL=['۰–۴','۵–۹','۱۰–۱۴','۱۵–۱۷','۱۸–۲۰'];
+  var bmax=Math.max(1,an.buckets[0],an.buckets[1],an.buckets[2],an.buckets[3],an.buckets[4]);
+  var qs=an.qstats.filter(function(q){return q.avg!=null;});
+  $('resBody').innerHTML=
+  '<div class="stat-strip">'+
+  '<div class="ss-item"><span class="ss-l">'+ic('users')+' شرکت‌کننده</span><span class="ss-num">'+fa(an.count)+'</span></div>'+
+  '<div class="ss-item"><span class="ss-l">'+ic('bar')+' میانگین</span><span class="ss-num">'+(an.mean!=null?fmt(an.mean):'—')+'</span></div>'+
+  '<div class="ss-item"><span class="ss-l">'+ic('list')+' میانه</span><span class="ss-num">'+(an.median!=null?fmt(an.median):'—')+'</span></div>'+
+  '<div class="ss-item"><span class="ss-l">'+ic('check')+' نرخ قبولی</span><span class="ss-num">'+(an.passRate!=null?fa(an.passRate)+'٪':'—')+'</span></div>'+
+  '<div class="ss-item"><span class="ss-l">'+ic('star')+' بیشترین</span><span class="ss-num">'+(an.max!=null?fmt(an.max):'—')+'</span></div></div>'+
+  '<div class="grid-2 no-print"><div class="card"><div class="card-title">توزیع نمرات</div>'+
+  '<div class="bars">'+an.buckets.map(function(b,i){return '<div class="bar-col"><b>'+fa(b)+'</b><div class="bar" style="height:'+Math.max(3,b/bmax*100)+'%"></div><span>'+BL[i]+'</span></div>';}).join('')+'</div></div>'+
+  '<div class="card"><div class="card-title">سختی سؤال‌ها (درصد نمرهٔ کسب‌شده)</div>'+
+  (qs.length?'<div class="hbars">'+qs.map(function(q){return '<div class="hb"><span class="hb-l">س'+fa(q.no)+' — '+esc(String(q.text).slice(0,22))+'…</span>'+
+  '<div class="hb-t"><div class="hb-f '+(q.avg>=70?'g':q.avg<40?'r':'')+'" style="width:'+q.avg+'%"></div></div>'+
+  '<span class="hb-v">'+fa(q.avg)+'٪</span></div>';}).join('')+'</div>':empty('داده‌ای نیست','bar'))+'</div></div>'+
+  '<div class="card p0"><div class="card-title" style="padding:20px 20px 14px">پاسخ‌برگ‌ها</div>'+
+  (att.attempts.length?'<div class="tbl-wrap"><table class="tbl">'+
+  '<thead><tr><th>#</th><th>دانش‌آموز</th><th>کلاس</th><th>نمره</th><th>وضعیت</th><th>مدت</th><th>تحویل</th><th></th></tr></thead><tbody>'+
+  att.attempts.map(function(a,i){return '<tr><td><span class="rk '+(i<3?'r'+(i+1):'')+'">'+fa(i+1)+'</span></td>'+
+  '<td><div class="cell-user">'+av(a.name,'sm')+'<b>'+esc(a.name)+'</b></div></td>'+
+  '<td>'+esc(a.className)+'</td><td>'+scB(a.score20)+'</td>'+
+  '<td>'+(a.status==='graded'?'<span class="badge b-green">نهایی</span>':'<span class="badge b-saffron">در انتظار تشریحی</span>')+'</td>'+
+  '<td>'+fa(a.spentMin)+' دقیقه</td><td>'+jdate(a.submittedAt)+'</td>'+
+  '<td><div class="td-actions"><button class="btn ghost sm no-print" onclick="gOpen(\''+RES_ID+'\',\''+a.id+'\')">'+ic('eye',13)+' برگه</button></div></td></tr>';}).join('')+
+  '</tbody></table></div>':empty('هنوز کسی در این آزمون شرکت نکرده','users'))+'</div>';
+}
+async function openReview(aid){
+  try{
+    var d=await api('/attempts/'+aid);
+    $('view').innerHTML='<div class="rv-body"><div class="rv-top"><div><h1 style="font-size:20px;font-weight:800">'+esc(d.exam.title)+'</h1>'+
+    '<span style="font-size:12.5px;color:var(--muted)">'+jdate(d.attempt.submittedAt)+' — مدت: '+fa(d.attempt.spentMin)+' دقیقه</span></div>'+
+    '<button class="btn ghost" onclick="go(\'results\')">'+ic('chev-r')+' بازگشت</button></div>'+
+    d.questions.map(function(q,i){return qRev(q,i,d.showAnswers);}).join('')+'</div>';
+    window.scrollTo(0,0);
+  }catch(e){toast(e.message,'err');}
+}
+function qRev(q,i,show){
+  var st=q.myScore==null?'<span class="badge b-grey">در انتظار تصحیح معلم</span>':
+    q.myScore>=q.points?'<span class="badge b-green">کامل</span>':
+    q.myScore>0?'<span class="badge b-saffron">'+fmt(q.myScore)+' از '+fmt(q.points)+'</span>':
+    '<span class="badge b-red">نادرست</span>';
+  var opts='';
+  if((q.type==='mcq'||q.type==='multi')&&show&&q.correct){
+    var sel=q.type==='mcq'?(q.myAnswer?[String(q.myAnswer)]:[]):(Array.isArray(q.myAnswer)?q.myAnswer.map(String):[]);
+    opts=q.options.map(function(o){
+      var isC=q.correct.indexOf(o.id)>=0,isS=sel.indexOf(o.id)>=0;
+      return '<div class="rv-opt '+(isC?'ok':isS?'bad':'')+'"><span class="rv-mark '+(isC?'ok':isS?'bad':'')+'">'+(isC?ic('check',14):isS?ic('x',14):'')+'</span><span>'+esc(o.text)+'</span></div>';
+    }).join('');
+  }
+  if(q.type==='tf'&&show&&q.correct){
+    var c=q.correct[0]==='t',m=q.myAnswer;
+    opts='<div class="rv-opt '+(c?'ok':m==='t'?'bad':'')+'"><span class="rv-mark '+(c?'ok':m==='t'?'bad':'')+'">'+(c?ic('check',14):m==='t'?ic('x',14):'')+'</span><span>صحیح</span></div>'+
+    '<div class="rv-opt '+(!c?'ok':m==='f'?'bad':'')+'"><span class="rv-mark '+(!c?'ok':m==='f'?'bad':'')+'">'+(!c?ic('check',14):m==='f'?ic('x',14):'')+'</span><span>غلط</span></div>';
+  }
+  return '<div class="sh-q">'+
+  '<div class="sh-meta"><span>سؤال '+fa(i+1)+'</span><span>'+QTYPE[q.type]+'</span>'+
+  (q.flagged?'<span class="badge b-saffron">'+ic('flag',12)+' نشانه‌گذاری‌شده</span>':'')+
+  '<span class="sh-pts">'+(q.myScore!=null?fmt(q.myScore)+' / '+fmt(q.points):fmt(q.points)+' نمره')+'</span></div>'+
+  '<div class="sh-text">'+esc(q.text)+'</div>'+opts+
+  '<span class="sh-lab">پاسخ شما</span><div class="sh-ans">'+esc(ansText(q))+'</div>'+
+  (show&&q.type==='blank'&&q.accept?'<span class="sh-lab" style="margin-top:8px">پاسخ درست</span><div class="sh-key">'+esc(q.accept.split('|').join(' یا '))+'</div>':'')+
+  (show&&q.explanation?'<div class="sh-expl"><b>توضیح:</b> '+esc(q.explanation)+'</div>':'')+
+  '<div style="margin-top:10px">'+st+'</div></div>';
+}
+/* ================= پایش زنده ================= */
+VIEWS.monitor=async function(params){
+  var d=await api('/exams');
+  if(!d.exams.length){$('view').innerHTML='<div class="vwrap"><div class="card">'+empty('آزمونی وجود ندارد','eye')+'</div></div>';return;}
+  EXL=d.exams;
+  MON_ID=params.examId||EXL[0].id;
+  $('view').innerHTML='<div class="vwrap"><div class="vhead"><div class="vh-actions">'+
+  '<div class="searchbox" style="min-width:290px">'+ic('list',16)+
+  '<select id="monSel" style="border:none;background:none;outline:none;flex:1;font-family:inherit;font-size:13.5px;color:var(--ink)">'+
+  EXL.map(function(e){return '<option value="'+e.id+'"'+(e.id===MON_ID?' selected':'')+'>'+esc(e.title)+'</option>';}).join('')+'</select></div>'+
+  '<span class="badge b-teal">'+ic('zap',13)+' به‌روزرسانی هر ۴ ثانیه</span></div></div><div id="monBody"></div></div>';
+  $('monSel').onchange=function(e){MON_ID=e.target.value;monLoad();};
+  await monLoad();
+  timers.push(setInterval(function(){if(CUR.view==='monitor'&&MON_ID)monLoad();},4000));
+};
+async function monLoad(){
+  try{
+    var d=await api('/exams/'+MON_ID+'/live');
+    var live=d.rows.filter(function(r){return !r.done;}).length;
+    $('monBody').innerHTML=
+    '<div class="stat-strip">'+
+    '<div class="ss-item"><span class="ss-l">'+ic('zap')+' در حال آزمون</span><span class="ss-num">'+fa(live)+'</span></div>'+
+    '<div class="ss-item"><span class="ss-l">'+ic('check')+' تحویل‌داده</span><span class="ss-num">'+fa(d.rows.length-live)+'</span></div>'+
+    '<div class="ss-item"><span class="ss-l">'+ic('clock')+' مدت آزمون</span><span class="ss-num">'+fa(d.duration)+' دقیقه</span></div></div>'+
+    '<div class="card p0">'+
+    (d.rows.length?'<div class="tbl-wrap"><table class="tbl">'+
+    '<thead><tr><th>دانش‌آموز</th><th>پیشرفت</th><th>وضعیت</th><th>زمان باقی‌مانده</th><th>آخرین فعالیت</th><th>نمره</th></tr></thead><tbody>'+
+    d.rows.map(function(r){return '<tr><td><div class="cell-user">'+av(r.name,'sm')+'<div><b>'+esc(r.name)+'</b><span>'+esc(r.className)+'</span></div></div></td>'+
+    '<td style="min-width:160px"><div style="display:flex;align-items:center;gap:10px"><div class="hb-t" style="height:9px"><div class="hb-f g" style="width:'+(r.total?Math.round(r.answered/r.total*100):0)+'%"></div></div>'+
+    '<span style="font-size:11.5px;font-weight:700">'+fa(r.answered)+'/'+fa(r.total)+'</span></div></td>'+
+    '<td>'+(r.done?(r.status==='submitted'?'<span class="badge b-saffron">در انتظار تصحیح</span>':'<span class="badge b-green">تحویل‌داده</span>'):'<span class="badge b-teal">'+ic('zap',12)+' در حال آزمون</span>')+'</td>'+
+    '<td>'+(r.done?'—':'<b>'+timeStr(r.remaining/1000)+'</b>')+'</td>'+
+    '<td style="font-size:12px;color:var(--muted)">'+ago(r.lastSeen)+'</td>'+
+    '<td>'+(r.done?scB(r.score20):'—')+'</td></tr>';}).join('')+
+    '</tbody></table></div>':empty('هنوز کسی آزمون را شروع نکرده — به بچه‌ها بگویید «شروع» را بزنند','users'))+'</div>';
+  }catch(e){}
+}
+/* ================= رتبه‌بندی و تنظیمات ================= */
+VIEWS.leader=async function(){
+  var d=await api('/leaderboard');
+  $('view').innerHTML='<div class="vwrap"><div class="vhead"><h1 style="font-size:20px;font-weight:800">جدول رتبه‌بندی'+(me.role==='student'?' کلاس '+esc(me.className):'')+'</h1>'+
+  (d.myRank?'<span class="badge b-saffron">رتبهٔ شما: '+fa(d.myRank)+'</span>':'')+'</div><div class="card p0">'+
+  (d.rows.length?'<div class="tbl-wrap"><table class="tbl">'+
+  '<thead><tr><th>رتبه</th><th>دانش‌آموز</th><th>کلاس</th><th>میانگین</th><th>آزمون‌ها</th><th>بهترین</th></tr></thead><tbody>'+
+  d.rows.map(function(r,i){return '<tr class="'+(r.userId===me.id?'me-row':'')+'"><td><span class="rk '+(i<3?'r'+(i+1):'')+'">'+fa(i+1)+'</span></td>'+
+  '<td><div class="cell-user">'+av(r.name,'sm')+'<b>'+esc(r.name)+(r.userId===me.id?' (شما)':'')+'</b></div></td>'+
+  '<td>'+esc(r.className)+'</td><td>'+scB(r.avg)+'</td><td>'+fa(r.count)+'</td><td>'+fmt(r.best)+'</td></tr>';}).join('')+
+  '</tbody></table></div>':empty('هنوز آزمونی به‌صورت کامل تصحیح نشده','star'))+'</div></div>';
+};
+VIEWS.profile=async function(){
+  $('view').innerHTML='<div class="vwrap"><div class="grid-2" style="max-width:900px">'+
+  '<div class="card" style="text-align:center">'+av(me.name,'lg')+
+  '<h2 style="font-size:20px;font-weight:800;margin-top:14px">'+esc(me.name)+'</h2>'+
+  '<p style="font-size:12.5px;color:var(--muted)">@'+esc(me.username)+' — '+ROLE_FA[me.role]+'</p>'+
+  (me.role==='student'?'<div style="margin-top:10px"><span class="badge b-saffron">'+ic('layers',13)+' '+esc(me.className||'بدون کلاس')+'</span></div>'+
+  '<div class="card-title" style="margin-top:20px">پیوستن به کلاس دیگر</div>'+
+  '<p style="font-size:12px;color:var(--muted);margin-bottom:10px">اگر کلاست عوض شده، کد جدید را وارد کن:</p>'+
+  '<div class="fld"><label>کد کلاس</label><input id="pjCode" class="ltr" placeholder="مثلاً K7F2A"></div>'+
+  '<button class="btn primary" id="pjGo">'+ic('check')+' عضویت</button>':'')+
+  '</div>'+
+  '<div class="card"><div class="card-title">تغییر رمز عبور</div>'+
+  '<div class="fld"><label>رمز فعلی</label><input type="password" id="pc" class="ltr"></div>'+
+  '<div class="fld"><label>رمز جدید (حداقل ۴ نویسه)</label><input type="password" id="pn" class="ltr"></div>'+
+  '<button class="btn primary" id="pGo">'+ic('key')+' تغییر رمز</button></div></div></div>';
+  $('pGo').onclick=async function(){
+    try{
+      await api('/change-pass','POST',{current:$('pc').value,next:$('pn').value});
+      toast('رمز عبور تغییر کرد');$('pc').value='';$('pn').value='';
+    }catch(e){toast(e.message,'err');}
+  };
+  if($('pjGo')){$('pjGo').onclick=async function(){
+    try{
+      await api('/classes/join','POST',{code:$('pjCode').value});
+      me=(await api('/me')).user;
+      toast('به کلاس جدید پیوستید');go('profile');
+    }catch(e){toast(e.message,'err');}
+  };}
+};
+VIEWS.settings=async function(){
+  $('view').innerHTML='<div class="vwrap"><div class="grid-2">'+
+  '<div class="card"><div class="card-title">امنیت حساب</div>'+
+  '<div class="fld"><label>رمز فعلی</label><input type="password" id="pc" class="ltr"></div>'+
+  '<div class="fld"><label>رمز جدید (حداقل ۴ نویسه)</label><input type="password" id="pn" class="ltr"></div>'+
+  '<button class="btn primary" id="pGo">'+ic('key')+' تغییر رمز</button></div>'+
+  '<div class="card"><div class="card-title">آدرس سامانه برای دانش‌آموزان</div>'+
+  '<p style="font-size:13px;color:var(--ink2)">این آدرس را روی تخته بنویسید:</p>'+
+  '<div class="origin-box">'+esc(location.origin)+'</div><br>'+
+  '<button class="btn ghost" onclick="copyText(location.origin)">'+ic('copy')+' کپی آدرس</button>'+
+  '<p class="hint">اگر دانش‌آموزان این آدرس را باز نمی‌کنند: همه باید به همان Wi-Fi وصل باشند و فایروالِ ویندوز اجازهٔ دسترسی به Node.js داده باشد.</p></div></div>'+
+  '<div class="grid-2">'+
+  '<div class="card"><div class="card-title">پشتیبان‌گیری</div>'+
+  '<p style="font-size:13px;color:var(--ink2);margin-bottom:14px">همهٔ داده‌ها (کاربران، آزمون‌ها، نمره‌ها) در فایل <span class="ltr">data/db.json</span> است و هر روز یک نسخهٔ خودکار نگه داشته می‌شود.</p>'+
+  '<a class="btn ghost" href="/api/backup?t='+encodeURIComponent(TOKEN)+'" download style="text-decoration:none">'+ic('download')+' دانلود نسخهٔ پشتیبان</a> '+
+  '<button class="btn ghost" onclick="$(\'restoreFile\').click()">'+ic('upload')+' بازگردانی از فایل</button>'+
+  '<input type="file" id="restoreFile" accept=".json" class="hidden">'+
+  '<p class="hint">بازگردانی، داده‌های فعلی را جایگزین می‌کند — فقط با فایل پشتیبان خودتان انجام دهید.</p></div>'+
+  '<div class="card"><div class="card-title">حساب معلمِ همکار</div>'+
+  '<p style="font-size:13px;color:var(--ink2);margin-bottom:14px">اگر همکارتان هم می‌خواهد آزمون بگذارد؛ کلاس‌ها و آزمون‌های هر معلم جدا و خصوصی است.</p>'+
+  '<div class="fld"><label>نام</label><input id="tN"></div>'+
+  '<div class="fld"><label>نام کاربری (لاتین)</label><input id="tU" class="ltr"></div>'+
+  '<div class="fld"><label>رمز عبور</label><input id="tP" class="ltr" value="1234"></div>'+
+  '<button class="btn primary" id="tGo">'+ic('plus')+' ساختن حساب معلم</button></div></div></div>';
+  $('pGo').onclick=async function(){
+    try{
+      await api('/change-pass','POST',{current:$('pc').value,next:$('pn').value});
+      toast('رمز عبور تغییر کرد');$('pc').value='';$('pn').value='';
+    }catch(e){toast(e.message,'err');}
+  };
+  $('restoreFile').onchange=function(){
+    var f=this.files[0];if(!f)return;
+    var r=new FileReader();
+    r.onload=function(){
+      var data;
+      try{data=JSON.parse(r.result);}catch(e){return toast('فایل معتبر JSON نیست','err');}
+      if(!data.users||!data.exams)return toast('ساختار فایل پشتیبان درست نیست','err');
+      confirmM('بازگردانی پشتیبان','همهٔ داده‌های فعلی با محتوای این فایل جایگزین می‌شود. مطمئن هستید؟','بازگردانی',async function(){
+        try{await api('/restore','POST',data);toast('بازگردانی شد — از حساب خارج و دوباره وارد شوید');closeModal();}
+        catch(e){toast(e.message,'err');}
+      },true);
+    };
+    r.readAsText(f);
+    this.value='';
+  };
+  $('tGo').onclick=async function(){
+    try{
+      await api('/teachers','POST',{name:$('tN').value,username:$('tU').value,password:$('tP').value});
+      toast('حساب معلم ساخته شد');$('tN').value='';$('tU').value='';
+    }catch(e){toast(e.message,'err');}
+  };
+};
+/* ================= اجرای آزمون (دانش‌آموز) ================= */
+async function startExam(id){
+  try{var d=await api('/exams/'+id+'/start','POST');openRunner(d);}
+  catch(e){toast(e.message,'err');go('exams');}
+}
+function openRunner(p){
+  RS={aid:p.attempt.id,questions:p.questions,answers:p.answers||{},flags:p.flags||{},cur:0,
+  endsAt:Date.now()+p.attempt.remaining*1000,timer:null,beeped:false,finishing:false,saveT:{},result:null};
+  $('runner').classList.remove('hidden');
+  $('runner').innerHTML='<div class="runner">'+
+  '<div class="r-head"><div class="r-exam"><b>'+esc(p.exam.title)+'</b><span>'+esc(p.exam.subject)+' — '+esc(me.name)+'</span></div>'+
+  '<div class="r-mid"><span class="saveind" id="rSave">'+ic('check',13)+' ذخیرهٔ خودکار</span><span class="r-prog" id="rProg"></span>'+
+  '<div class="r-timer" id="rTimer">'+ic('clock',17)+'<span>--:--</span></div>'+
+  '<button class="btn ghost sm" onclick="rExit()">'+ic('logout',13)+' خروج موقت</button></div></div>'+
+  '<div class="r-body"><div class="card q-view" id="rvQ"></div>'+
+  '<aside class="card r-pal"><div class="pal-h">نقشهٔ سؤال‌ها</div><div class="pal-grid" id="rPal"></div>'+
+  '<div class="pal-legend"><span><span class="lg lg-ans"></span>پاسخ‌داده</span><span><span class="lg lg-flag"></span>نشانه‌گذاری‌شده</span><span><span class="lg"></span>بی‌پاسخ</span></div>'+
+  '<button class="btn primary block" onclick="rFinish()">'+ic('send')+' پایان و تحویل آزمون</button></aside></div></div>';
+  RS.timer=setInterval(rTick,300);
+  rTick();rRender();
+  window.scrollTo(0,0);
+}
+function rTick(){
+  if(!RS||!$('rTimer'))return;
+  var rem=(RS.endsAt-Date.now())/1000;
+  var el=$('rTimer');
+  el.innerHTML=ic('clock',17)+'<span>'+timeStr(rem)+'</span>';
+  el.className='r-timer'+(rem<30?' crit':rem<120?' warn':'');
+  if(rem<60&&!RS.beeped){RS.beeped=true;beep();}
+  if(rem<=0){clearInterval(RS.timer);rFinishNow(true);}
+}
+function setSave(st){
+  var el=$('rSave');if(!el)return;
+  el.className='saveind '+(st===0?'saving':st===1?'':'err');
+  el.innerHTML=st===0?'در حال ذخیره…':st===1?ic('check',13)+' ذخیره شد':ic('alert',13)+' خطا در ذخیره';
+}
+function rRender(){
+  if(!RS)return;
+  var i=RS.cur,q=RS.questions[i],ans=RS.answers[q.id],body='';
+  if(q.type==='mcq'||q.type==='multi'){
+    body='<div class="picks">'+q.options.map(function(o){
+      var sel=q.type==='mcq'?ans===o.id:(Array.isArray(ans)&&ans.indexOf(o.id)>=0);
+      return '<div class="opt-pick'+(sel?' sel':'')+'" onclick="rPick(\''+q.id+'\',\''+o.id+'\')">'+
+      '<span class="om'+(q.type==='multi'?' om-c':'')+'">'+ic('check',14)+'</span><span class="opt-txt">'+esc(o.text)+'</span></div>';
+    }).join('')+'</div>';
+  }else if(q.type==='tf'){
+    body='<div class="picks">'+
+    '<div class="opt-pick'+(ans==='t'?' sel':'')+'" onclick="rPick(\''+q.id+'\',\'t\')"><span class="om">'+ic('check',14)+'</span><span class="opt-txt">صحیح</span></div>'+
+    '<div class="opt-pick'+(ans==='f'?' sel':'')+'" onclick="rPick(\''+q.id+'\',\'f\')"><span class="om">'+ic('x',14)+'</span><span class="opt-txt">غلط</span></div></div>';
+  }else if(q.type==='blank'){
+    body='<input class="blank-in" placeholder="پاسخ خود را اینجا بنویسید…" value="'+(ans!=null?esc(String(ans)):'')+'" oninput="rInput(\''+q.id+'\',this.value)">';
+  }else{
+    body='<textarea class="essay-in" placeholder="پاسخ تشریحی خود را بنویسید…" oninput="rInput(\''+q.id+'\',this.value)">'+(ans!=null?esc(String(ans)):'')+'</textarea>'+
+    '<div class="cc">پاسخ شما به‌صورت خودکار روی سرور ذخیره می‌شود</div>';
+  }
+  var answered=RS.questions.filter(function(x){return RS.answers[x.id]!=null;}).length;
+  $('rProg').textContent='پاسخ‌داده: '+fa(answered)+' از '+fa(RS.questions.length);
+  $('rvQ').innerHTML='<div class="qv-meta"><span>سؤال '+fa(i+1)+' از '+fa(RS.questions.length)+'</span><span>'+QTYPE[q.type]+'</span><span>'+fmt(q.points)+' نمره</span>'+
+  '<button class="flagbtn'+(RS.flags[q.id]?' on':'')+'" onclick="rFlag(\''+q.id+'\')">'+ic('flag',13)+' '+(RS.flags[q.id]?'نشانه‌گذاری‌شده':'نشانه‌گذاری برای بازبینی')+'</button></div>'+
+  '<div class="qv-text">'+esc(q.text)+'</div><div class="qv-ans">'+body+'</div>'+
+  '<div class="r-nav"><button class="btn ghost"'+(i===0?' disabled':'')+' onclick="rGo('+(i-1)+')">'+ic('chev-r',15)+' قبلی</button>'+
+  '<span class="r-navhint">با نقشهٔ سؤال‌ها آزادانه جابه‌جا شوید</span>'+
+  '<button class="btn primary"'+(i===RS.questions.length-1?' disabled':'')+' onclick="rGo('+(i+1)+')">بعدی '+ic('chev-l',15)+'</button></div>';
+  $('rPal').innerHTML=RS.questions.map(function(qq,idx){
+    var cls=((RS.answers[qq.id]!=null)?'p-ans ':'')+(RS.flags[qq.id]?'p-flag ':'')+(idx===RS.cur?'p-cur':'');
+    return '<button class="pal-btn '+cls+'" onclick="rGo('+idx+')">'+fa(idx+1)+'</button>';
+  }).join('');
+}
+function rGo(i){if(i<0||i>=RS.questions.length)return;RS.cur=i;rRender();}
+function rPick(qid,oidv){
+  var q=RS.questions.find(function(x){return x.id===qid;});
+  if(q.type==='mcq'){
+    if(RS.answers[qid]===oidv)delete RS.answers[qid];else RS.answers[qid]=oidv;
+  }else if(q.type==='tf'){RS.answers[qid]=oidv;}
+  else{
+    var a=Array.isArray(RS.answers[qid])?RS.answers[qid].slice():[];
+    var ix=a.indexOf(oidv);if(ix>=0)a.splice(ix,1);else a.push(oidv);
+    if(a.length)RS.answers[qid]=a;else delete RS.answers[qid];
+  }
+  rCommit(qid);rRender();
+}
+function rInput(qid,v){
+  RS.answers[qid]=v;setSave(0);
+  clearTimeout(RS.saveT[qid]);
+  RS.saveT[qid]=setTimeout(function(){rCommit(qid);},700);
+}
+async function rCommit(qid){
+  if(!RS)return;
+  try{
+    var val=RS.answers[qid]==null?null:RS.answers[qid];
+    var r=await api('/attempts/'+RS.aid+'/answer','POST',{qid:qid,value:val});
+    if(r.expired){clearInterval(RS.timer);toast('زمان آزمون به پایان رسید','err');rFinishNow(true);return;}
+    setSave(1);
+  }catch(e){setSave(-1);}
+}
+async function rFlag(qid){
+  RS.flags[qid]=!RS.flags[qid];
+  try{await api('/attempts/'+RS.aid+'/flag','POST',{qid:qid,on:RS.flags[qid]});}catch(e){}
+  rRender();
+}
+function rFinish(){
+  var un=RS.questions.filter(function(q){return RS.answers[q.id]==null;}).length;
+  confirmM('پایان آزمون',un?fa(un)+' سؤال بی‌پاسخ داری. پس از تحویل امکان تغییر پاسخ نیست؛ تحویل بدهم؟':'آمادهٔ تحویل هستی؟','بله، تحویل بده',function(){rFinishNow(false);});
+}
+async function rFinishNow(auto){
+  if(!RS||RS.finishing)return;RS.finishing=true;
+  try{
+    var d=await api('/attempts/'+RS.aid+'/finish','POST',{answers:RS.answers});
+    clearInterval(RS.timer);RS.result=d;
+    closeModal();
+    showResult(d,auto);
+  }catch(e){toast(e.message,'err');RS.finishing=false;}
+}
+function rExit(){
+  confirmM('خروج موقت','از آزمون خارج می‌شوی؟ پاسخ‌های ذخیره‌شده می‌ماند و تا پایانِ زمانِ آزمون می‌توانی از فهرست آزمون‌ها «ادامه» را بزنی.','خروج',function(){
+    closeModal();closeRunner();go('exams');
+  });
+}
+function closeRunner(){
+  if(RS&&RS.timer)clearInterval(RS.timer);
+  RS=null;
+  $('runner').classList.add('hidden');$('runner').innerHTML='';
+}
+function showResult(d,auto){
+  var C=2*Math.PI*80;
+  var pct=d.attempt.totalPoints?Math.min(1,Math.max(0,d.attempt.earned/d.attempt.totalPoints)):0;
+  var full=d.questions.filter(function(q){return q.myScore!=null&&q.myScore>=q.points;}).length;
+  var wrong=d.questions.filter(function(q){return q.myScore!=null&&q.myScore<q.points;}).length;
+  var pend=d.questions.filter(function(q){return q.myScore==null;}).length;
+  $('runner').innerHTML='<div class="runner"><div class="result-screen"><div class="girih soft"></div>'+
+  '<div class="card rs-card"><div class="rs-head">'+esc(d.exam.title)+'</div>'+
+  '<div class="rs-title">'+(auto?'زمان آزمون به پایان رسید':'آزمون تو تحویل شد')+'</div>'+
+  '<div class="rs-ring"><svg class="ring-svg" viewBox="0 0 190 190"><circle class="ring-bg" cx="95" cy="95" r="80"></circle>'+
+  '<circle class="ring-fg" id="ringFg" cx="95" cy="95" r="80" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'" style="stroke:'+(d.attempt.pass?'var(--green)':'var(--red)')+'"></circle></svg>'+
+  '<div class="rs-num"><b>'+fmt(d.attempt.score20)+'</b><span>از ۲۰</span></div></div>'+
+  '<div class="rs-grade">'+(d.attempt.pass?'<span class="badge b-green" style="font-size:14px;padding:7px 18px">'+ic('award',14)+' قبول شدی — آفرین!</span>':'<span class="badge b-red" style="font-size:14px;padding:7px 18px">'+ic('alert',14)+' قبول نشدی — دوباره تلاش کن</span>')+'</div>'+
+  (pend?'<div class="rs-pend"><span class="badge b-saffron">'+fa(pend)+' سؤال تشریحی در انتظار نمره‌دهی معلم است — نمرهٔ فعلی بدون آن‌ها محاسبه شده</span></div>':'')+
+  '<div class="rs-stats"><div><b style="color:var(--green)">'+fa(full)+'</b><span>پاسخ کامل</span></div>'+
+  '<div><b style="color:var(--red)">'+fa(wrong)+'</b><span>نادرست / ناقص</span></div>'+
+  '<div><b>'+fmt(d.attempt.earned)+' / '+fmt(d.attempt.totalPoints)+'</b><span>نمرهٔ عددی</span></div>'+
+  '<div><b>'+fa(d.attempt.spentMin)+' دقیقه</b><span>زمان صرف‌شده</span></div></div>'+
+  '<div class="rs-actions">'+
+  (d.showAnswers?'<button class="btn primary" onclick="showReview()">'+ic('eye')+' مشاهدهٔ پاسخ‌نامه</button>':'')+
+  '<button class="btn ghost" onclick="closeRunner();go(\'dash\')">'+ic('grid')+' بازگشت به داشبورد</button></div>'+
+  '</div></div></div>';
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    var fg=$('ringFg');if(fg)fg.style.strokeDashoffset=C*(1-pct);
+  });});
+}
+function showReview(){
+  var d=RS&&RS.result;if(!d)return;
+  $('runner').innerHTML='<div class="runner">'+
+  '<div class="r-head"><div class="r-exam"><b>پاسخ‌نامهٔ تشریحی</b><span>'+esc(d.exam.title)+' — '+fmt(d.attempt.score20)+' از ۲۰</span></div>'+
+  '<button class="btn ghost sm" onclick="closeRunner();go(\'results\')">'+ic('x',13)+' بستن</button></div>'+
+  '<div class="rv-body">'+d.questions.map(function(q,i){return qRev(q,i,d.showAnswers);}).join('')+'</div></div>';
+  window.scrollTo(0,0);
+}
+/* جلوگیری از بسته‌شدن تصادفی tab وسط آزمون */
+window.addEventListener('beforeunload',function(e){if(RS){e.preventDefault();e.returnValue='';}});
+/* ---------- راه‌اندازی ---------- */
+(async function init(){
+  try{
+    var s=await api('/setup');
+    authMode=s.needsSetup?'setup':'login';
+  }catch(e){authMode='login';}
+  if(TOKEN){
+    try{me=(await api('/me')).user;renderApp();return;}
+    catch(e){TOKEN=null;localStorage.removeItem('az_token');}
+  }
+  renderAuth();
+})();
+</script>
+</body>
+</html>

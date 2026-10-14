@@ -1,0 +1,7 @@
+{
+  "name": "azmoonsaz",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": { "pg": "^8.12.0" },
+  "engines": { "node": "20.x" }
+}
